@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LaJuana.Domain\LaJuana.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Peoples\Organizations\Commands\" />
+    <Folder Include="Features\Peoples\Queries\FindPeopleByName\" />
+    <Folder Include="Features\Tags\" />
+    <Folder Include="Features\Tags\Commads\" />
+    <Folder Include="Features\Tags\Queries\" />
+    <Folder Include="Features\Tags\Queries\FindTagById\" />
+    <Folder Include="Features\Tags\Queries\FindTagByName\" />
+    <Folder Include="Features\Tags\Queries\FindTagByTagCategoryId\" />
+    <Folder Include="Features\Tags\Queries\GetTagsList\" />
+    <Folder Include="Features\Tags\Commads\CreateTag\" />
+    <Folder Include="Features\Tags\Commads\DeleteTag\" />
+    <Folder Include="Features\Tags\Commads\UpdateTag\" />
+    <Folder Include="Features\Peoples\Commands\IndexLucenePeople\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00016" />
+    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00016" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Features\Peoples\Queries\GetPeoples\" />
+    <None Remove="Features\Tags\" />
+    <None Remove="Features\Tags\Commads\" />
+    <None Remove="Features\Tags\Queries\" />
+    <None Remove="Features\Tags\Queries\FindTagById\" />
+    <None Remove="Features\Tags\Queries\FindTabByName\" />
+    <None Remove="Features\Tags\Queries\FindTagByTagCategoryId\" />
+    <None Remove="Features\Tags\Queries\GetTagsList\" />
+    <None Remove="Features\Tags\Commads\CreateTag\" />
+    <None Remove="Features\Tags\Commads\DeleteTag\" />
+    <None Remove="Features\Tags\Commads\UpdateTag\" />
+    <None Remove="Features\Peoples\Commands\IndexLucenePeople\" />
+  </ItemGroup>
+</Project>

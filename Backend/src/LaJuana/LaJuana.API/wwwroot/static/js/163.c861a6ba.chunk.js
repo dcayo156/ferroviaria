@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfrontend_pwa=self.webpackChunkfrontend_pwa||[]).push([[163],{7163:function(n,t,e){e.r(t);e(2791);var o=e(6871),i=e(184);t.default=function(){var n=(0,o.s0)();return(0,i.jsxs)("div",{children:["home",(0,i.jsx)("button",{onClick:function(){n("/authentication/login")},children:"go to login"})]})}}}]);
+//# sourceMappingURL=163.c861a6ba.chunk.js.map
