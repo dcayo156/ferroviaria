@@ -50,9 +50,9 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        var context = services.GetRequiredService<LaJuanaDbContext>();
-        await context.Database.MigrateAsync();
-        await LaJuanaDbContextSeed.SeedAsync(context, loggerFactory.CreateLogger<LaJuanaDbContextSeed>());
+        //var context = services.GetRequiredService<LaJuanaDbContext>();
+        //await context.Database.MigrateAsync();
+        //await LaJuanaDbContextSeed.SeedAsync(context, loggerFactory.CreateLogger<LaJuanaDbContextSeed>());
 
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();

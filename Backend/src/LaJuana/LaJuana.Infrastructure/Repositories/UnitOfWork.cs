@@ -10,23 +10,7 @@ namespace LaJuana.Infrastructure.Repositories
     {
         private Hashtable _repositories;
         private readonly LaJuanaDbContext _context;
-        private IOrganizationRepository _organizationRepository;
-        private IPeopleRepository _peopleRepository;
-        private ITagRepository _tagRepository;
-        private ITagCategoryRepository _tagCategoryRepository;
-        private IAddressRepository _addressRepository;
-        private IRelationshipRepository _relationshipRepository;
-        private IRelationshipTypeRepository _relationshipTypeRepository;
-        private IRelationshipDetailRepository _relationshipDetailRepository;
-        public IOrganizationRepository OrganizationRepository => _organizationRepository ??= new OrganizationRepository(_context);
-        public IPeopleRepository PeopleRepository => _peopleRepository ??= new PeopleRepository(_context);
-        public ITagRepository TagRepository => _tagRepository ??= new TagRepository(_context);
-        public ITagCategoryRepository TagCategoyRepository => _tagCategoryRepository ??= new TagCategoryRepository(_context);
-        public IAddressRepository AddressRepository => _addressRepository ??= new AddressRepository(_context);
-        public IRelationshipRepository RelationshipRepository => _relationshipRepository ??= new RelationshipRepository(_context);
-        public IRelationshipTypeRepository RelationshipTypeRepository => _relationshipTypeRepository ??= new RelationshipTypeRepository(_context);
-        public IRelationshipDetailRepository RelationshipDetailRepository => _relationshipDetailRepository ??= new RelationshipDetailRepository(_context);
-
+        
         public UnitOfWork(LaJuanaDbContext context)
         {
             _context = context;

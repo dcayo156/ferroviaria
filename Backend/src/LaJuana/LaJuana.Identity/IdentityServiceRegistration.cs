@@ -17,11 +17,11 @@ namespace LaJuana.Identity
         public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-            var DbPath = System.IO.Path.Join(Environment.CurrentDirectory, "LaJuanaSecurity.db");
+            //var DbPath = System.IO.Path.Join(Environment.CurrentDirectory, "LaJuanaSecurity.db");
             services.AddDbContext<LaJuanaIdentityDbContext>(options =>
-                                //options.UseSqlServer(configuration.GetConnectionString("IdentityConnectionString"),
+                                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
                                 //b => b.MigrationsAssembly(typeof(LaJuanaIdentityDbContext).Assembly.FullName)));
-                                options.UseSqlite($"Data Source={DbPath}"));
+                                //options.UseSqlite($"Data Source={DbPath}"));
 
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
