@@ -2,6 +2,9 @@
 using LaJuana.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using LaJuana.Application.Contracts.Infrastructure;
+using System.Net;
+using System;
+
 namespace LaJuana.Infrastructure.Persistence
 {
     public class LaJuanaDbContext : DbContext
@@ -36,8 +39,10 @@ namespace LaJuana.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-        }        
-        
+            modelBuilder.Entity<Program>().HasKey(p => p.Id);
+        }
+        public DbSet<Program>? Programs { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Document> Documents { get; set; }
     }
 }
