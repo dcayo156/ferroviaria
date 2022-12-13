@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "845c6239-1599-404b-9ef8-cc0d3fa7a5f5",
+		"name": "FO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15262743"
+	},
+	"item": [
+		{
+			"name": "Programs",
+			"item": [
+				{
+					"name": "GesListProgarm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:49976/api/Programs/GetPrograms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49976",
+							"path": [
+								"api",
+								"Programs",
+								"GetPrograms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByIdPrograms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:49976/api/Programs/FindProgramsById/04c865af-112e-45bc-b810-2b9aaa60b60a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49976",
+							"path": [
+								"api",
+								"Programs",
+								"FindProgramsById",
+								"04c865af-112e-45bc-b810-2b9aaa60b60a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreatePrograms",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"F1786576-1056-479B-8EFD-D86B1FC8F27D\",\r\n  \"iconName\": \"iconname2\",\r\n  \"fileName\": \"filename2\",\r\n  \"url\": \"http\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:49976/api/Programs/CreatePrograms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49976",
+							"path": [
+								"api",
+								"Programs",
+								"CreatePrograms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Programs",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"5332cd89-14a0-4aaf-c163-08dadbe803b3\",\r\n  \"name\": \"Diego3\",\r\n  \"iconName\": \"iconname32\",\r\n  \"fileName\": \"filename23\",\r\n  \"url\": \"ht33tp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:49976/api/Programs/UpdatePrograms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49976",
+							"path": [
+								"api",
+								"Programs",
+								"UpdatePrograms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Programs",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:49976/api/Programs/DeletePrograms/5332cd89-14a0-4aaf-c163-08dadbe803b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "49976",
+							"path": [
+								"api",
+								"Programs",
+								"DeletePrograms",
+								"5332cd89-14a0-4aaf-c163-08dadbe803b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
