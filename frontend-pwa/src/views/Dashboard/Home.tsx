@@ -1,7 +1,9 @@
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, Grid } from '@mui/material';
 import React from 'react';
 import { styled } from '@mui/system';
+import Container from '@mui/material';
 import laJuana from '../../assets/img/logo.png'
+import CardIcon from '../../components/cards/CardIcon';
 interface HomeProps {
 
 }
@@ -14,23 +16,28 @@ const AvatarDisplay = styled('img')(({ theme }) => ({
 const Home: React.FunctionComponent<HomeProps> = () => {
     return <Box
         display="flex"
-        flexDirection="column"
     >
-        <Box
-            display="flex"
-            justifyContent="center"
-        >
-            <AvatarDisplay src={laJuana} />
-        </Box>
-        <Box
-            display="flex"
-            justifyContent="center"
-        >
-            <ButtonGroup disableElevation variant="contained">
-                <Button>Personas</Button>
-                <Button>Busquedas</Button>
-            </ButtonGroup>
-        </Box>
+        <Grid container spacing={2}>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+            <Grid item xs={4}>
+                <CardIcon></CardIcon>
+            </Grid>
+        </Grid>
+        
     </Box>
 }
 

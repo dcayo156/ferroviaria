@@ -1,4 +1,4 @@
-import {ITag} from './Tag'
+import {ITag} from './delete-Tag'
 export interface ITagCategory{
     id:string
     description:string

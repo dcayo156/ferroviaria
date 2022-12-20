@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { ITag } from "../../types/Tag";
+import { ITag } from "../../types/delete-Tag";
 import { baseQueryWithReauth } from "../FetchBaseQuery";
 import {
     ICategoryData,

@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid';
 import PersonalDataSimple from './Forms/PersonalDataSimple'
 import Addresses from './Forms/AddressesSingle'
 import Tags from './Forms/TagsSimple'
-import { ITag, selectValuesProps } from '../../store/types/Tag';
+import { ITag, selectValuesProps } from '../../store/types/delete-Tag';
 import { cacheNames } from 'workbox-core/_private';
 import { stringify } from 'querystring';
 import { useGetTagCategoryQuery } from '../../store/services/Tag';

@@ -1,4 +1,4 @@
-import { ITag } from "./Tag"
+import { ITag } from "./delete-Tag"
 export enum Gender {
     Femenino = "Femenino",
     Masculino = "Masculino",

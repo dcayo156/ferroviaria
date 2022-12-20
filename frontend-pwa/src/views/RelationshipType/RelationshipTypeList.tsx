@@ -14,7 +14,7 @@ import {
   ICreateRelationshipType,
   IRelationshipType,
   IRelationshipTypesGrouped,
-} from "../../store/types/RelationshipType";
+} from "../../store/types/delete-RelationshipType";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";

@@ -78,16 +78,16 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
     </DrawerHeader>
     <Divider />
     <List>
-        <LinkTo to="/main/home" text="Inicio" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
+        <LinkTo to="/main/home" text="Home" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
             <HomeIcon/>
         </LinkTo>
-        <LinkTo to="/main/search-address" text="Mapas" open={open} active={uri.includes("/main/search-address")} switchOpen={switchOpen}>
+        <LinkTo to="/access-program" text="Access Program" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
             <MapIcon/>
         </LinkTo>
-        <LinkTo to="/tag-category" text="Categorias" open={open} active={uri.includes("/tag-category")} switchOpen={switchOpen}>
+        <LinkTo to="/tag-category" text="Categories" open={open} active={uri.includes("/tag-category")} switchOpen={switchOpen}>
             <AutoStoriesIcon />
         </LinkTo>
-        <LinkTo to="/relationship/relationshipType" text="Tipos de Relaciones" open={open} active={uri.includes("/relationship/relationshipType")} switchOpen={switchOpen}>
+        <LinkTo to="/relationship/relationshipType" text="Document" open={open} active={uri.includes("/relationship/relationshipType")} switchOpen={switchOpen}>
             <UserIcon />
         </LinkTo>
         <LinkTo to="/person" text="Personas" open={open} active={uri.includes("/person")} switchOpen={switchOpen}>

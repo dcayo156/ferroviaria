@@ -52,7 +52,7 @@ const MainAppBar: React.FunctionComponent<MainAppBarProps> = ({ open, drawerwidt
             </IconButton>
             <img src={logo} style={{ "width": "4em" }} />
             <Typography variant="h1" color="black" >
-                La Juana 
+                Ferroviaria Oriental
             </Typography>
             <IconButton
                 onClick={handleClickMenu}

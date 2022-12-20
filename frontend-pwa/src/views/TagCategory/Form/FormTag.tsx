@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITag } from '../../../store/types/Tag'
+import { ITag } from '../../../store/types/delete-Tag'
 import SimpleCardInLine from '../../../components/cards/SimpleCardInLine';
 import { useUpdateTagMutation,useDeleteTagMutation } from '../../../store/services/Tag'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';

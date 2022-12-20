@@ -5,7 +5,7 @@ import { Button, ButtonProps } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Masonry from '@mui/lab/Masonry';
 import { ITagCategory } from '../../../store/types/Category'
-import { ITag } from '../../../store/types/Tag'
+import { ITag } from '../../../store/types/delete-Tag'
 import CreateTagCategory from '../Form/Create'
 import MasonryCard from '../../../components/cards/MasonryCard'
 import DialogCreateTag from '../../Tag/Forms/DialogCreate'
