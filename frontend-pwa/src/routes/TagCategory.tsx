@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import MainLayout from '../layout/MainLayout';
-import Loadable from '../ui-component/Loadable';
+import Loadable from '../components/LoadComponent/Loadable';
 const IndexTagCategory = Loadable(lazy(() => import('../views/TagCategory')));
 
 const TagCategoryRoutes = {

@@ -33,7 +33,7 @@ export default function Header() {
                         <Toolbar>
                             <img src={logo} style={{ "width": "4em" }} />
                             <Typography variant="h1" color="black">
-                                La Juana
+                                Ferroviaria Oriental
                             </Typography>
                         </Toolbar>
                     </AppBar>

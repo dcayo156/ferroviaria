@@ -1,10 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 import MainRoutes from './MainRoutes';
-import PersonRoutes from './PersonRoutes';
-import TagCategory from './TagCategory';
 import AuthenticationRoutes from './AuthenticationRoutes';
 import { lazy } from 'react';
-import Loadable from '../ui-component/Loadable';
+import Loadable from '../components/LoadComponent/Loadable';
 import MinimalLayout from '../layout/MinimalLayout';
 import ReltaionRoutes from './ReltionshipRoutes';
 import AuthRoutes from './AuthRoutes';
@@ -25,9 +23,6 @@ export default function ThemeRoutes() {
     },
     MainRoutes,
     AuthenticationRoutes,
-    PersonRoutes,
-    ReltaionRoutes,
-    TagCategory,
     AuthRoutes,
     UserRoutes]);
 }

@@ -11,13 +11,13 @@ import { esES } from '@mui/x-data-grid';
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#5ED2B8",
-      light: "#9BD3FF",
-      dark: "#123264"
+      main: "#FCA101",
+      light: "#FCEF01",
+      dark: "#958E00"
     },
     secondary: {
-      main: "#00A480",
-      contrastText: '#fff',
+      main: "#308200",
+      contrastText: '#000',
     },
     grey: {
       "100": "#E1F1F3"
