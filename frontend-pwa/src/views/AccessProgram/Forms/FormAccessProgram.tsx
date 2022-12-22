@@ -1,12 +1,12 @@
 import * as React from 'react';
 import FormCard from '../../../components/cards/FormCard';
-import { IUserRequest } from '../../../store/types/Auth';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Box, Button, Container, CssBaseline, Grid,  TextField } from '@mui/material';
-import { IAccessProgramRequest } from '../../../store/types/AccessProgram';
+import { Box, Button, Container, CssBaseline, FormLabel, Grid,  TextField } from '@mui/material';
+import { IAccessProgram } from '../../../store/types/AccessProgram';
+import defaultIcon from '../../../../src/assets/img/default-icon.png'
 interface FormAccessProgramProps {
-    accessprogram: IAccessProgramRequest
-    setAccessProgram: (value: React.SetStateAction<IAccessProgramRequest>) => void
+    accessprogram: IAccessProgram
+    setAccessProgram: (value: React.SetStateAction<IAccessProgram>) => void
     isCreate:boolean
 }
 const FormAccessProgram: React.FunctionComponent<FormAccessProgramProps> = ({ accessprogram, setAccessProgram, isCreate }) => {
@@ -14,8 +14,21 @@ const FormAccessProgram: React.FunctionComponent<FormAccessProgramProps> = ({ ac
     const [errorConfirmPassword,setErrorConfirmPassword] = React.useState<boolean>(false);
     
     
-   
-
+   const [image,setImage]=React.useState< string | undefined >("");
+   const onFileChange= (e:any) => {
+        var file =  e.target.files[0];
+        if(file){
+            const pattern = /imagen-*/;
+            var reader = new FileReader();
+            
+            reader.onload = (e) => {
+                setImage(reader.result?reader.result as string:"")
+                setAccessProgram({ ...accessprogram, "iconName": file.name,file:(reader.result?reader.result as string:"") }) 
+            }
+            //setAccessProgram({ ...accessprogram, "iconName": file.name,file:reader.result as string }) 
+            reader.readAsDataURL(file)
+        }
+   }
   return  <FormCard
     icon={<AccountCircleIcon sx={{ fontSize: 50 }} />}
     style={undefined}
@@ -39,6 +52,45 @@ const FormAccessProgram: React.FunctionComponent<FormAccessProgramProps> = ({ ac
                 noValidate
                 sx={{ mt: 1 }}
             >
+                <Grid container direction="column" justifyContent="center" alignItems="center">
+                    
+                    <Grid item>
+                        <label title="Cambiar Foto" style={{width:"250px",height:"250px"}} htmlFor="raised-button-file">
+                            <img className="" src={image!="" ?image:defaultIcon} alt="" style={{width:"250px",height:"250px"}} />
+                        </label>
+                    
+                    </Grid>
+                    <Grid item >
+                        <Grid container>
+                            <Grid item>
+                                <input
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    id="raised-button-file"
+                                    multiple
+                                    type="file"
+                                    onChange={(e)=> onFileChange(e) }
+                                    />
+                                    <label htmlFor="raised-button-file">
+                                    <Button variant="outlined" component="span"  >
+                                        Subir
+                                    </Button>
+                                    </label> 
+                            </Grid>
+                            <Grid item style={{marginLeft:3, textOverflow:"ellipsis",overflow:"hidden",width:"200px",whiteSpace:"nowrap"}}>
+                                <label >
+                                    {
+                                    accessprogram.iconName == "" ?
+                                    "Seleccionar una imagen":
+                                    accessprogram.iconName
+                                    }
+                                    
+                                </label>
+                            </Grid>
+                        </Grid>
+                        
+                    </Grid>
+                </Grid>
                 <TextField
                     margin="normal"
                     required
@@ -49,37 +101,6 @@ const FormAccessProgram: React.FunctionComponent<FormAccessProgramProps> = ({ ac
                     value={accessprogram!.name}
                     onChange={({ target: { value } }) => setAccessProgram({ ...accessprogram, "name": value })}
                 />  
-                <Grid container>
-                    <Grid item xs >
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="icon"
-                            label="Icon"
-                            name="icon"
-                            autoFocus
-                            value={accessprogram!.iconName}
-                            onChange={({ target: { value } }) => setAccessProgram({ ...accessprogram, "iconName": value })}
-                        />
-                    </Grid>
-                    <Grid item >
-                        <input
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        id="raised-button-file"
-                        multiple
-                        type="file"
-                        />
-                        <br />
-                        <label htmlFor="raised-button-file">
-                        <Button variant="outlined" component="span">
-                            Upload
-                        </Button>
-                        </label> 
-                    </Grid>
-                </Grid>
-
                 <TextField
                     margin="normal"
                     required

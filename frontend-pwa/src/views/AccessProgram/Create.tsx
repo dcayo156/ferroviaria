@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from 'react';
 import Grid from "@mui/material/Grid";
 import { useNavigate} from 'react-router-dom'
-import { useRegisterMutation } from '../../store/services/Auth'
+import { useCreateProgramMutation } from '../../store/services/AccessProgram'
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
@@ -10,33 +10,42 @@ import MainCard from '../../components/cards/MainCard';
 import CardButton from '../../components/cards/CardButton';
 import FormAccessProgram from "./Forms/FormAccessProgram";
 import SaveIcon from '@mui/icons-material/Save';
-import { IAccessProgramRequest } from '../../store/types/AccessProgram';
+import { IAccessProgram } from '../../store/types/AccessProgram';
 import LoadingButton from "../../components/Buttons/LoadingButton";
 export default function Register() {
     const navigate =  useNavigate();
-    const [accessProgram, setAccessProgram] = useState<IAccessProgramRequest>({
+    const [accessProgram, setAccessProgram] = useState<IAccessProgram>({
         id:'',
-        fileName:"",
+        file:"",
         iconName:"",
         name:"",
         url:""
     });
-    const [registerUser] = useRegisterMutation();
+    const [registerAccessProgram] = useCreateProgramMutation();
     const [isLoading,setIsLoading]=React.useState(false);
-
+    const isURL=(str:string)=> {
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return pattern.test(str);
+      }
     const saveChanges = () => { 
         setIsLoading(true)
-        const userToCreate: IAccessProgramRequest = {
+        console.log(accessProgram)
+        const useToCreate: IAccessProgram = {
             id:'',
             iconName:accessProgram.iconName,
-            fileName:accessProgram.fileName,
+            file:accessProgram.file,
             name:accessProgram.name,
             url:accessProgram.url
           };
-        /*registerUser(userToCreate).then((response: { data: IRegisterResponse; } | { error: FetchBaseQueryError | SerializedError; })=>{
+          registerAccessProgram(useToCreate).then((response: { data: string } | { error: FetchBaseQueryError | SerializedError; })=>{
             if("data" in response){
                 toast.success("Registro exitoso");
-                navigate("/user");
+                navigate("/access-program");
             }
             if("error" in response){
                 if("message" in response.error)
@@ -45,13 +54,13 @@ export default function Register() {
                     toast.error(response.error.error);
             }
             setIsLoading(false)
-        });*/
+        });
     }
     return (
     <MainCard 
         title="Registrar Acceso de Programa" 
         secondary={
-            <CardButton type="back" title="Lista de Usuarios" link="/user" />}
+            <CardButton type="back" title="Lista de Acceso a Programas" link="/access-program" />}
     >{
         <>
         <FormAccessProgram accessprogram={accessProgram} setAccessProgram={setAccessProgram} isCreate= {true}/>

@@ -1,8 +1,8 @@
 
-export interface IAccessProgramRequest {
+export interface IAccessProgram {
     id: string
     name: string|undefined
     iconName: string|undefined
-    fileName: string|undefined
+    file: string|undefined
     url: string|undefined
 }
