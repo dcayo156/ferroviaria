@@ -31,13 +31,15 @@ namespace LaJuana.Application.Features.Programs.Commands.CreatePrograms
         {
             if (request == null) { throw new Exception("El objeto es null"); }
 
+            var base64 = request.File.Split(',')[1];
+
             var directoryPath = "C:\\Programs\\Icon";
 
             var filePath = directoryPath + "\\" + request.IconName;
 
             _helpersDocument.CheckDirectory(directoryPath);
 
-            await _helpersDocument.SaveFile(request.File, filePath);           
+            await _helpersDocument.SaveFile(base64, filePath);           
 
             request.FilePath = filePath;
 

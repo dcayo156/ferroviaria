@@ -2,6 +2,7 @@
 using LaJuana.Application.Features.Programs.Commands.DeletePrograms;
 using LaJuana.Application.Features.Programs.Commands.UpdatePrograms;
 using LaJuana.Application.Features.Programs.Queries.FindProgramsById;
+using LaJuana.Application.Features.Programs.Queries.FindPromansFileById;
 using LaJuana.Application.Features.Programs.Queries.GetListPrograms;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Net;
 
 namespace LaJuana.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/[controller]")]
     [ApiController]
     public class ProgramsController : ControllerBase
     {
@@ -71,6 +72,16 @@ namespace LaJuana.API.Controllers
             var query = new FindProgramsByIdQuery(id);
             var Programs = await _mediator.Send(query);
             return Ok(Programs);
+        }
+
+        [HttpGet("FindProgramsFileById/{id}")]
+        //[Authorize]
+        [ProducesResponseType(typeof(ProgramsFullVm), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<string>> FindProgramsFileById(Guid id)
+        {
+            var query = new FindProgramsFileByIdQuery(id);
+            var fileBase64 = await _mediator.Send(query);
+            return Ok(fileBase64);
         }
     }
 }

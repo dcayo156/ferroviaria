@@ -22,11 +22,7 @@ namespace LaJuana.Application.Features.Programs.Queries.FindProgramnsById
             var program = await _unitOfWork.ProgramRepository.FindByIdAsync(request.Id);
 
             var programFullVm = _mapper.Map<ProgramsFullVm>(program);
-
-            using (var stream = System.IO.File.OpenRead(program.FilePath))
-            {
-                programFullVm.File = new FormFile(stream, 0, stream.Length, program.IconName, Path.GetFileName(stream.Name));              
-            }
+                       
             return programFullVm;
         }
 
