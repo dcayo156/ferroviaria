@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import MainLayout from '../layout/MainLayout';
-import Loadable from '../ui-component/Loadable';
+import Loadable from '../components/LoadComponent/Loadable';
 const IndexUser = Loadable(lazy(() => import('../views/User')));
 const UserCreate = Loadable(lazy(() => import('../views/User/Create')));
 const UserEdit = Loadable(lazy(() => import('../views/User/Edit')));

@@ -4,7 +4,7 @@ import { useGetTagCategoryQuery } from '../../../store/services/Tag'
 import TagIcon from '@mui/icons-material/LocalOffer';
 import FormCard from '../../../components/cards/FormCard'
 import { useTheme } from '@mui/material/styles';
-import { selectValuesProps } from '../../../store/types/Tag';
+import { selectValuesProps } from '../../../store/types/delete-Tag';
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 

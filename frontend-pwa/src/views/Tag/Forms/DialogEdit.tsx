@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DialogForm from "../../../components/Dialog/Index";
 import { Box, TextField } from "@mui/material";
-import { ITag } from '../../../store/types/Tag';
+import { ITag } from '../../../store/types/delete-Tag';
 import { ITagCategory } from '../../../store/types/Category';
 import { useUpdateTagMutation } from '../../../store/services/Tag';
 import { toast } from 'react-toastify';

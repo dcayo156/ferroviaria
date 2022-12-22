@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { ITag } from '../../../store/types/Tag';
+import { ITag } from '../../../store/types/delete-Tag';
 import DialogCreateTag from '../../Tag/Forms/DialogCreate'
 interface TagsProps {
     tags: ITag[] 

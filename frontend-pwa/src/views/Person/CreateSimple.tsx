@@ -15,7 +15,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import SaveIcon from '@mui/icons-material/Save';
-import { ITag, selectValuesProps } from '../../store/types/Tag';
+import { ITag, selectValuesProps } from '../../store/types/delete-Tag';
 import LoadingButton from '../../components/Buttons/LoadingButton'
 import { useGetTagCategoryQuery } from '../../store/services/Tag';
 

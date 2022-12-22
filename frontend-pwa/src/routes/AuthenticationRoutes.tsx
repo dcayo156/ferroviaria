@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import Loadable from '../ui-component/Loadable';
+import Loadable from '../components/LoadComponent/Loadable';
 import MinimalLayout from '../layout/MinimalLayout';
 
 const Login = Loadable(lazy(() => import('../components/Security/Login')));

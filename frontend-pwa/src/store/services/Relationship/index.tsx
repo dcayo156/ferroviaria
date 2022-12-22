@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { IRelationShip, IRelationshipByPerson, IRelationShipTypes } from '../../types/Relationship';
-import { ICreateRelationshipType, IRelationshipType, IRelationshipTypesGrouped } from '../../types/RelationshipType';
+import { IRelationShip, IRelationshipByPerson, IRelationShipTypes } from '../../types/delete-Relationship';
+import { ICreateRelationshipType, IRelationshipType, IRelationshipTypesGrouped } from '../../types/delete-RelationshipType';
 import { baseQueryWithReauth } from '../FetchBaseQuery';
 
 export const relationshipApi = createApi({

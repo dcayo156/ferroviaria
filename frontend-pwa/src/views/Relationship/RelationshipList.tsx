@@ -13,7 +13,7 @@ import {
 import {
     IRelationShip,
   IRelationshipByPerson 
-} from "../../store/types/Relationship";
+} from "../../store/types/delete-Relationship";
 import CardLink from "../../components/cards/CardLink";
 import DialogForm from "../../components/Dialog/Index";
 import { useGetListPeopleQuery } from "../../store/services/Person";
