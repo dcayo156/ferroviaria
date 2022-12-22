@@ -11,16 +11,32 @@ namespace LaJuana.Application.Features.Programs.Commands.UpdatePrograms
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<UpdateProgramsCommand> _logger;
-        public UpdateProgramsCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UpdateProgramsCommand> logger)
+        private readonly ILogger<UpdateProgramsCommand> _logger; 
+        private readonly IHelpersDocument _helpersDocument;
+        public UpdateProgramsCommandHandler(IUnitOfWork unitOfWork,
+            IMapper mapper,
+            ILogger<UpdateProgramsCommand> logger,
+            IHelpersDocument helpersDocument)      
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
-        }
+            _helpersDocument = helpersDocument;            
+        }      
 
         public async Task<Unit> Handle(UpdateProgramsCommand request, CancellationToken cancellationToken)
         {
+            if (request == null) { throw new Exception("El objeto es null"); }
+
+            var directoryPath = "C:\\Programs\\Icon";
+
+            var filePath = directoryPath + "\\" + request.IconName;
+
+            _helpersDocument.CheckDirectory(directoryPath);
+
+            await _helpersDocument.SaveFile(request.File, filePath);
+
+            request.FilePath = filePath;
 
             var ProgramsToUpdate = await _unitOfWork.Repository<Program>().GetByIdAsync(request.Id);
             if (ProgramsToUpdate == null)

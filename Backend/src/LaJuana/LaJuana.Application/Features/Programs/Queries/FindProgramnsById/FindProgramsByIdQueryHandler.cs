@@ -3,6 +3,7 @@ using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Features.Programs.Queries.FindProgramsById;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace LaJuana.Application.Features.Programs.Queries.FindProgramnsById
 {
@@ -18,9 +19,15 @@ namespace LaJuana.Application.Features.Programs.Queries.FindProgramnsById
 
         public async Task<ProgramsFullVm> Handle(FindProgramsByIdQuery request, CancellationToken cancellationToken)
         {
-            var programList = await _unitOfWork.ProgramRepository.FindByIdAsync(request.Id);
+            var program = await _unitOfWork.ProgramRepository.FindByIdAsync(request.Id);
 
-            return _mapper.Map<ProgramsFullVm>(programList);
+            var programFullVm = _mapper.Map<ProgramsFullVm>(program);
+
+            using (var stream = System.IO.File.OpenRead(program.FilePath))
+            {
+                programFullVm.File = new FormFile(stream, 0, stream.Length, program.IconName, Path.GetFileName(stream.Name));              
+            }
+            return programFullVm;
         }
 
     }

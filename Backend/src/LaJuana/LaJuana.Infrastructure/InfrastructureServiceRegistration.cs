@@ -22,12 +22,14 @@ namespace LaJuana.Infrastructure
             );
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IHelpersDocument, HelperDocument>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));            
 
             services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<LuceneSettings>(c => configuration.GetSection("LuceneSettings"));
             services.AddTransient<ILuceneService, LaJuanaLuceneContext>();
+            services.Configure<DirectoryIconSettings>(c => configuration.GetSection("DirectoryIconSettings"));
             return services;
         }
 
