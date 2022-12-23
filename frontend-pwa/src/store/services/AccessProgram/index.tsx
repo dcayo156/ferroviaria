@@ -1,5 +1,5 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
-import { IAccessProgram } from '../../types/AccessProgram'
+import { IAccessProgram } from '../../types/AccessProgram';
 import { baseQueryWithReauth } from '../FetchBaseQuery';
 
 
@@ -9,17 +9,22 @@ export const accessProgramApi = createApi({
     baseQuery:baseQueryWithReauth ,
     endpoints: (builder) => ({
         getFindProgramById: builder.query<IAccessProgram, string|null>({
-            query: (id: string | null) => `Program/FindProgramById/${id}`,
+            query: (id: string | null) => `Programs/FindProgramById/${id}`,
             providesTags:[{type:"AccessProgram", id:"Find"}]
         }),
         getListProgram: builder.query<IAccessProgram[], void>({
-            query: () => `Program/GetPrograms`,
+            query: () => `Programs/GetPrograms`,
+            providesTags:[{type:"AccessProgram", id:"List"}],
+            
+        }),
+        getFileProgram: builder.query<string, string>({
+            query: (id) => `Programs/FindProgramsFileById/${id}`,
             providesTags:[{type:"AccessProgram", id:"List"}],
             
         }),
         createProgram: builder.mutation<string,IAccessProgram>({
             query: (accessProgramWithTags) => ({
-                url: 'Program/CreatePrograms',
+                url: 'Programs/CreatePrograms',
                 method: "POST",
                 body: accessProgramWithTags
             }),
@@ -27,7 +32,7 @@ export const accessProgramApi = createApi({
         }),
         updateProgram: builder.mutation<IAccessProgram, Partial<IAccessProgram>>({
             query: (accessProgram) => ({
-                url: 'Program/UpdatePrograms',
+                url: 'Programs/UpdatePrograms',
                 method: "PUT",
                 body: accessProgram
             }),
@@ -35,7 +40,7 @@ export const accessProgramApi = createApi({
         }),
         deleteProgram: builder.mutation<string,string>({
             query: (id) => ({
-                url: `Program/DeletePrograms/${id}`,
+                url: `Programs/DeletePrograms/${id}`,
                 method: "DELETE",
                 body: {id:id}
             }),

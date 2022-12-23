@@ -8,6 +8,7 @@ using LaJuana.Application.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Drawing;
 
 namespace LaJuana.API.Controllers
 {
@@ -81,7 +82,8 @@ namespace LaJuana.API.Controllers
         {
             var query = new FindProgramsFileByIdQuery(id);
             var fileBase64 = await _mediator.Send(query);
-            return Ok(fileBase64);
+            return File(Convert.FromBase64String(fileBase64), "image/png");
         }
+       
     }
 }

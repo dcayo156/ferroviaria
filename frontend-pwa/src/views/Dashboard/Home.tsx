@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import Container from '@mui/material';
 import laJuana from '../../assets/img/logo.png'
 import CardIcon from '../../components/cards/CardIcon';
+import { useGetListProgramQuery } from '../../store/services/AccessProgram';
 interface HomeProps {
 
 }
@@ -14,28 +15,22 @@ const AvatarDisplay = styled('img')(({ theme }) => ({
 }));
 
 const Home: React.FunctionComponent<HomeProps> = () => {
+    const { data: accessProgramData, error, isLoading } = useGetListProgramQuery();
     return <Box
+        paddingTop={5}
         display="flex"
+        justifyContent="center"
     >
-        <Grid container spacing={2}>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
-            <Grid item xs={4}>
-                <CardIcon></CardIcon>
-            </Grid>
+        <Grid container maxWidth="md" spacing={2}>
+            
+            {accessProgramData&&
+                accessProgramData?.map(access=>{
+                    return <Grid item xs={4}>
+                        <CardIcon accessProgram={access}/>
+                    </Grid>
+                })
+            }
+            
         </Grid>
         
     </Box>

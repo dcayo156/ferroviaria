@@ -1,6 +1,7 @@
 import * as React from "react";
-import { useGetListGetUsersQuery, useUpdateRoleAdminMutation} from "../../store/services/Auth";
-import { IUpdateRoleAdminRequest, IUserResponse } from "../../store/types/Auth";
+
+import { useGetListProgramQuery, useGetFindProgramByIdQuery } from '../../store/services/AccessProgram'
+import { IAccessProgram } from "../../store/types/AccessProgram";
 import MainCard from "../../components/cards/MainCard";
 import CardButton from "../../components/cards/CardButton";
 import { LinearProgress } from "@mui/material";
@@ -8,22 +9,32 @@ import { IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import { SerializedError } from "@reduxjs/toolkit";
+import { URL_API_V1 } from "../../store/services";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
 interface ListAccessProgramProps {}
 const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () => {
-  const { data: userData, error, isLoading } = useGetListGetUsersQuery();
+  const { data: accessProgramData, error, isLoading } = useGetListProgramQuery();
   const navigate = useNavigate();
-  const [changedRol] = useUpdateRoleAdminMutation();
+  
   const columnsDataGrid: GridColDef[] = [
     { field: "id", headerName: "ID", minWidth: 15, hide: true},
     { field: "name", headerName: "Name", minWidth: 170, flex:1  },
     { field: "url", headerName: "URL", minWidth: 170 , flex:1 },
-    { field: "application", headerName: "Application", minWidth: 170, flex:1  },
+    { field: "iconname", headerName: "Icon", minWidth: 100, flex:1,
+      sortable: false,
+      filterable:false,
+      hideable:false,
+      disableColumnMenu:true,
+      renderCell: (params) => {
+        return <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%",width:"100%"}}>
+            <img style={{height:"90%"}} src={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`} alt={`${params.row.iconName}`} title={`${params.row.iconName}`} />
+        </div>
+        
+      }
+    },
     {
       field: "action",
       headerName: "Action",
@@ -35,19 +46,7 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
       disableColumnMenu:true,
       renderCell: (params) => {
         const onClickChangedRol = (id: string, status: boolean) => {
-          var mensaje = !status? "Seguro de volver Admnistrador a este Usuario":"Seguro de volver Operador a este Usuario";
-          var bool = window.confirm(mensaje);
-          const updateRoleAdminRequest : IUpdateRoleAdminRequest = {id:id, Status : !status};          
-          bool &&
-            changedRol(updateRoleAdminRequest).then((response:| { data: IUserResponse }| { error: FetchBaseQueryError | SerializedError }) => {
-                if ("data" in response) {
-                  toast.success(`Se cambio el Rol correctamente`);
-                }
-                if ("error" in response) {
-                  toast.error("Error al momento de cambiar el Rol del usuario");
-                }                
-              }
-            );
+          
         };
         const onClickEditUser = (id: string) => {
           navigate(`/User/${id}/edit`);
@@ -91,7 +90,7 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
       ) : (
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={userData !== undefined ? (userData as IUserResponse[]) : []}
+            rows={accessProgramData !== undefined ? (accessProgramData as IAccessProgram[]) : []}
             columns={columnsDataGrid}
             pageSize={5}
             rowsPerPageOptions={[5]}
