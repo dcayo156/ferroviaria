@@ -1,0 +1,30 @@
+﻿using LaJuana.Application.Contracts.Persistence;
+using LaJuana.Domain;
+using LaJuana.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+namespace LaJuana.Infrastructure.Repositories
+{
+    public class CategoriesRepository : RepositoryBase<Category>, ICategoriesRepository
+    {
+        public CategoriesRepository(LaJuanaDbContext context) : base(context)
+        {
+
+        }
+        public async Task<IEnumerable<Category>> GetListCategories()
+        {
+            return await _context.Categories!
+                .OrderBy(p => p.Name)  
+                .ToListAsync();
+
+        }
+        public async Task<Category> FindByIdAsync(Guid Id)
+        {
+            var category = await _context.Categories!.Where(p => p.Id == Id)
+                .OrderBy(x => x.Name)            
+                .FirstOrDefaultAsync();
+
+            return category;
+        }
+    }
+}

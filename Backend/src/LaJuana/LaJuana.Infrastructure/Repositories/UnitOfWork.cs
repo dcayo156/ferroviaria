@@ -12,6 +12,10 @@ namespace LaJuana.Infrastructure.Repositories
         private readonly LaJuanaDbContext _context;
         private IProgramsRepository _programsRepository;
         public IProgramsRepository ProgramRepository => _programsRepository ??= new ProgramsRepository(_context);
+
+        private ICategoriesRepository _categoriesRepository;
+        public ICategoriesRepository CategoryRepository => _categoriesRepository ??= new CategoriesRepository(_context);
+
         public UnitOfWork(LaJuanaDbContext context)
         {
             _context = context;
