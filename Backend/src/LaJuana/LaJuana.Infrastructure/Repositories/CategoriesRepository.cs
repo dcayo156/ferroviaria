@@ -14,6 +14,7 @@ namespace LaJuana.Infrastructure.Repositories
         public async Task<IEnumerable<Category>> GetListCategories()
         {
             return await _context.Categories!
+                .Include(c => c.ParentCategory)
                 .OrderBy(p => p.Name)  
                 .ToListAsync();
 

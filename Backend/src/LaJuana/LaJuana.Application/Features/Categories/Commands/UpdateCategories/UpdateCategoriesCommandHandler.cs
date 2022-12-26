@@ -31,6 +31,24 @@ namespace LaJuana.Application.Features.Categories.Commands.UpdateCategories
                 _logger.LogError($"No se encontro el Category id {request.Id}");
                 throw new NotFoundException(nameof(Category), request.Id);
             }
+
+            if (request.ParentCategoryId != null)
+            {
+                var parentCategory = await _unitOfWork.CategoryRepository.FindByIdAsync(request.ParentCategoryId.Value);
+                
+                if (parentCategory == null) 
+                {
+                    _logger.LogError($"No se encontro el Parent Category {request.Id}");
+                    throw new Exception("No existe el Parent Category"); 
+                }
+               
+                if (request.Id == request.ParentCategoryId)
+                {
+                    _logger.LogError($"El Id y ParentId deben de ser diferentes {request.Id}");
+                    throw new Exception("El Id y ParentId deben de ser diferentes"); 
+                }
+               
+            }
             _mapper.Map(request, categorysToUpdate, typeof(UpdateCategoriesCommand), typeof(Category));
 
             _unitOfWork.Repository<Category>().UpdateEntity(categorysToUpdate);

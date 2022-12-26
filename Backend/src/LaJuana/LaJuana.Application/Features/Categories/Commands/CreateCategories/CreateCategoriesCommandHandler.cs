@@ -26,6 +26,16 @@ namespace LaJuana.Application.Features.Categories.Commands.CreateCategories
         {
             if (request == null) { throw new Exception("El objeto para dar alta la Categoria es null"); }
 
+            if (request.ParentCategoryId != null)
+            {
+                var parentCategory = await _unitOfWork.CategoryRepository.FindByIdAsync(request.ParentCategoryId.Value);
+                if (parentCategory == null) 
+                {
+                    _logger.LogError($"No se encontro el Parent Category {request.ParentCategoryId.Value}");
+                    throw new Exception($"No se encontro el Parent Category {request.ParentCategoryId.Value}");
+                }
+            }
+
             var categoryEntity = _mapper.Map<Category>(request);
 
             _unitOfWork.Repository<Category>().AddEntity(categoryEntity);

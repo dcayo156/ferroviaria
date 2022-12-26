@@ -25,7 +25,7 @@ namespace LaJuana.Application.Features.Categories.Commands.DeleteCategories
             var CategorysToDelete = await _unitOfWork.Repository<Category>().GetByIdAsync(request.Id);
             if (CategorysToDelete == null)
             {
-                _logger.LogError($"{request.Id} Categorys no existe en el sistema");
+                _logger.LogError($"{request.Id} Category no existe en el sistema");
                 throw new NotFoundException(nameof(Category), request.Id);
             }
             _unitOfWork.Repository<Category>().DeleteEntity(CategorysToDelete);
