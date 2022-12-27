@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InfoWindowF, Marker } from "@react-google-maps/api";
 import Map from "../../components/Map";
-import { IResultPeopleAddressByTag } from "../../store/types/Category";
+import { IResultPeopleAddressByTag } from "../../store/types/delete-Category";
 import { useGetFindPeopleByIdQuery } from "../../store/services/Person";
 import { Button, CardActions, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";

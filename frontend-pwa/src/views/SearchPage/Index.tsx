@@ -1,7 +1,7 @@
 import { Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useGetCategoriesWithTagsQuery, useGetPeopleAddressByTagQuery } from "../../store/services/Tag";
-import { ICategoryData, IRequestPeopleAddressByTagV2, IResultPeopleAddressByTag, ITagItem, Category } from "../../store/types/Category";
+import { ICategoryData, IRequestPeopleAddressByTagV2, IResultPeopleAddressByTag, ITagItem, Category } from "../../store/types/delete-Category";
 import MyMap from "./SearchMap";
 import AccordionList from "./CheckBoxList/Index";
 import { StyledTag } from "./CheckBoxList/StyledTag";

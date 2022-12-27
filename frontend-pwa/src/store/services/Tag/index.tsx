@@ -6,7 +6,7 @@ import {
     IRequestPeopleAddressByTagV2,
   IResultPeopleAddressByTag,
   ITagCategory,
-} from "../../types/Category";
+} from "../../types/delete-Category";
 export const tagApi = createApi({
   reducerPath: "tagApi",
   tagTypes: ["Tag", "TagCategory", "PeopleAddressByTag"],

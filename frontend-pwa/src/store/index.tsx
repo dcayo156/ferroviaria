@@ -4,6 +4,7 @@ import { personApi} from './services/Person'
 import {authApi} from './services/Auth'
 import authReducer from './slices/Auth'
 import { accessProgramApi} from './services/AccessProgram'
+import { categoryApi} from './services/Category'
 
 export const createStore = (options?:ConfigureStoreOptions['preloadedState'] | undefined) => 
     configureStore({
@@ -11,11 +12,13 @@ export const createStore = (options?:ConfigureStoreOptions['preloadedState'] | u
             [personApi.reducerPath]: personApi.reducer,
             [authApi.reducerPath]: authApi.reducer,
             [accessProgramApi.reducerPath]: accessProgramApi.reducer,
+            [categoryApi.reducerPath]: categoryApi.reducer,
             auth: authReducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
                                                 personApi.middleware,
                                                 accessProgramApi.middleware,
+                                                categoryApi.middleware,
                                                 authApi.middleware
                                                 ),
         ...options,

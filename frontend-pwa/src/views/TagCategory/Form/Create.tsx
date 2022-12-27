@@ -2,7 +2,7 @@ import * as React from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, TextField, Button, IconButton } from '@mui/material';
-import { ITagCategory } from '../../../store/types/Category'
+import { ITagCategory } from '../../../store/types/delete-Category'
 import { useCreateTagCategoryMutation, useUpdateTagCategoryMutation } from '../../../store/services/Tag'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';

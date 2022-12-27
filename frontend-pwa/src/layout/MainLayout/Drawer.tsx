@@ -81,10 +81,10 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
         <LinkTo to="/main/home" text="Home" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
             <HomeIcon/>
         </LinkTo>
-        <LinkTo to="/access-program" text="Access Program" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
+        <LinkTo to="/access-program" text="Acceso a programas" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
             <MapIcon/>
         </LinkTo>
-        <LinkTo to="/tag-category" text="Categories" open={open} active={uri.includes("/tag-category")} switchOpen={switchOpen}>
+        <LinkTo to="/category" text="Categorias" open={open} active={uri.includes("/category")} switchOpen={switchOpen}>
             <AutoStoriesIcon />
         </LinkTo>
         <LinkTo to="/relationship/relationshipType" text="Document" open={open} active={uri.includes("/relationship/relationshipType")} switchOpen={switchOpen}>

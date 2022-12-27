@@ -4,10 +4,10 @@ import AuthenticationRoutes from './AuthenticationRoutes';
 import { lazy } from 'react';
 import Loadable from '../components/LoadComponent/Loadable';
 import MinimalLayout from '../layout/MinimalLayout';
-import ReltaionRoutes from './delete-ReltionshipRoutes';
 import AuthRoutes from './AuthRoutes';
 import UserRoutes from './UserRoutes';
 import AccessProgramRoute from './AccessProgram';
+import CategoryRoute from './Category';
 
 const Login = Loadable(lazy(() => import('../components/Security/Login')));
 
@@ -24,6 +24,7 @@ export default function ThemeRoutes() {
     },
     MainRoutes,
     AccessProgramRoute,
+    CategoryRoute,
     AuthenticationRoutes,
     AuthRoutes,
     UserRoutes]);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Typography, Checkbox, useTheme, Button } from '@mui/material'
-import { ICategoryData } from "../../../store/types/Category";
+import { ICategoryData } from "../../../store/types/delete-Category";
 interface AcordionCategoryProps {
     category: ICategoryData;
     setCategory: (tagId: string, tagCategoryId: string) => void;
