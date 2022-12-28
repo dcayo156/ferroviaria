@@ -26,7 +26,9 @@ const FormCategory: React.FunctionComponent<FormCategoryProps> = ({ category, se
         setCategory({ ...category, "parentCategoryId": event.target.value })
     }
     React.useEffect(()=>{
-        console.log(category)
+        if(!isCreate){
+            setEnabledSelect(category.parentCategoryId!=undefined)
+        }
     },[category])
     
   return  <FormCard
@@ -64,13 +66,13 @@ const FormCategory: React.FunctionComponent<FormCategoryProps> = ({ category, se
                 />  
                     <FormControlLabel onChange={()=>setEnabledSelect(!enableSelect)} control={<Checkbox checked={enableSelect} />} label="es subcategoria?" />
                     <FormControl sx={{ width: "100%" }}>
-                    <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                    <InputLabel id="select-categoryl">Categoria Padre</InputLabel>
                     <Select
                     disabled={!enableSelect}
                     id="select-category"
-                    value={category.parentCategoryId}
+                    value={category.parentCategoryId || '' }
                     onChange={handleChangeSelect}
-                    input={<OutlinedInput label="Name" />}
+                    input={<OutlinedInput label="Categoria Padre" />}
                     MenuProps={MenuProps}
                     name={"parentCategoryId"}
                     >

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useGetListCategoryQuery } from '../../store/services/Category'
+import { useGetListCategoryQuery,useDeleteCategoryMutation } from '../../store/services/Category'
 import { ICategory,ICategoryWithParent } from "../../store/types/Category";
 import MainCard from "../../components/cards/MainCard";
 import CardButton from "../../components/cards/CardButton";
@@ -9,16 +9,29 @@ import { IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
-import { URL_API_V1 } from "../../store/services";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { hasError } from '../../components/Security/ErrorManager';
+
 interface ListCategoryProps {}
 const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
   const { data: categoryData, error, isLoading } = useGetListCategoryQuery();
+  const [ deleteCategory,
+    { isLoading: isDeleting }, ] = useDeleteCategoryMutation();
   const navigate = useNavigate();
-  
+  const onDeleteCategory = (id: string) => {
+    deleteCategory(id).then((response: { data: string; } | { error: FetchBaseQueryError | SerializedError; })=>{
+        if (hasError(response, "Error al momento de eliminar categoria")) {
+            return;
+        }
+        if ("data" in response) {
+            toast.success(`La categoria ha sido eliminado existosamente`);
+        }
+    });
+ }
   const columnsDataGrid: GridColDef[] = [
     { field: "id", headerName: "ID", minWidth: 15, hide: true},
     { field: "name", headerName: "Nombre", minWidth: 170, flex:1  },
@@ -41,11 +54,16 @@ const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
       hideable:false,
       disableColumnMenu:true,
       renderCell: (params) => {
-        const onClickChangedRol = (id: string, status: boolean) => {
-          
+        const onClickDeleteCategory = (id: string) => {
+            const b=window.confirm("Esta seguro de eliminar esta categoria?")
+            if(b){
+              onDeleteCategory(id);
+            }else{
+              toast.success("Operacion Cancelada")
+            }
         };
         const onClickEditUser = (id: string) => {
-          navigate(`//${id}/edit`);
+          navigate(`/category/${id}/edit`);
         };
         
         return (
@@ -59,11 +77,11 @@ const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
             </IconButton>
             <IconButton
               onClick={() => {
-                onClickChangedRol(params.row.id,params.row.admin);
+                onClickDeleteCategory(params.row.id);
               }}
               color="secondary"    
               title="Delete"        >
-              <SyncAltOutlinedIcon />           
+              <DeleteOutlineIcon />           
             </IconButton>
           </>
         );

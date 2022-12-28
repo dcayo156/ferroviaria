@@ -37,7 +37,7 @@ export default function Register() {
         setIsLoading(true)
           updateCategory(category as ICategory).then((response: { data: ICategory } | { error: FetchBaseQueryError | SerializedError; })=>{
             if("data" in response){
-                toast.success("Registro exitoso");
+                toast.success("Registro Editado exitosamente");
                 navigate("/category");
             }
             if("error" in response){
