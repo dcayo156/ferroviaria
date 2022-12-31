@@ -26,8 +26,6 @@ namespace LaJuana.Application.Features.Programs.Queries.FindPromansFileById
             try
             {
                 var program = await _unitOfWork.ProgramRepository.FindByIdAsync(request.Id);
-
-                var programFullVm = _mapper.Map<ProgramsFullVm>(program);
                 Byte[] bytes = File.ReadAllBytes(program.FilePath);
                 String file = Convert.ToBase64String(bytes);
                 return file;

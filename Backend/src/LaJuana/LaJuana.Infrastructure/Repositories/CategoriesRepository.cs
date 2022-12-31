@@ -21,7 +21,7 @@ namespace LaJuana.Infrastructure.Repositories
         }
         public async Task<Category> FindByIdAsync(Guid Id)
         {
-            var category = await _context.Categories!.Where(p => p.Id == Id)
+            var category = await _context.Categories!.Where(p => p.Id == Id)                
                 .OrderBy(x => x.Name)            
                 .FirstOrDefaultAsync();
 

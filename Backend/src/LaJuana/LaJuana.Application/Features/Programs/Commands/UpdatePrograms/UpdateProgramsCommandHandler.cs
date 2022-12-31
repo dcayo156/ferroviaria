@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Exceptions;
+using LaJuana.Application.Features.Programs.Commands.CreatePrograms;
 using LaJuana.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -11,32 +13,24 @@ namespace LaJuana.Application.Features.Programs.Commands.UpdatePrograms
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ILogger<UpdateProgramsCommand> _logger; 
-        private readonly IHelpersDocument _helpersDocument;
+        private readonly ILogger<CreateProgramsCommand> _logger;
+        private readonly IDocumentService _directoryIconService;
         public UpdateProgramsCommandHandler(IUnitOfWork unitOfWork,
             IMapper mapper,
-            ILogger<UpdateProgramsCommand> logger,
-            IHelpersDocument helpersDocument)      
+            ILogger<CreateProgramsCommand> logger,
+            IDocumentService directoryIconService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
-            _helpersDocument = helpersDocument;            
-        }      
+            _directoryIconService = directoryIconService;
+        }
 
         public async Task<Unit> Handle(UpdateProgramsCommand request, CancellationToken cancellationToken)
         {
             if (request == null) { throw new Exception("El objeto es null"); }
 
-            var base64 = request.File.Split(',')[1];
-
-            var directoryPath = "C:\\Programs\\Icon";
-
-            var filePath = directoryPath + "\\" + request.IconName;
-
-            _helpersDocument.CheckDirectory(directoryPath);
-
-            await _helpersDocument.SaveFile(base64, filePath);
+            var filePath = await _directoryIconService.SaveIcon(request.IconName, request.File);
 
             request.FilePath = filePath;
 

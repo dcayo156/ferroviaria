@@ -1,6 +1,7 @@
 ﻿using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Models;
+using LaJuana.Infrastructure.Directories;
 using LaJuana.Infrastructure.Email;
 using LaJuana.Infrastructure.Persistence;
 using LaJuana.Infrastructure.Repositories;
@@ -22,14 +23,14 @@ namespace LaJuana.Infrastructure
             );
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IHelpersDocument, HelperDocument>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));            
 
             services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<LuceneSettings>(c => configuration.GetSection("LuceneSettings"));
             services.AddTransient<ILuceneService, LaJuanaLuceneContext>();
-            services.Configure<DirectoryIconSettings>(c => configuration.GetSection("DirectoryIconSettings"));
+            services.Configure<DirectoryIconSettings>(configuration.GetSection("DirectoryIconSettings"));
+            services.AddTransient<IDocumentService, DocumentService>();
             return services;
         }
 

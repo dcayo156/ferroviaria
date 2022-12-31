@@ -15,6 +15,8 @@ namespace LaJuana.Infrastructure.Repositories
 
         private ICategoriesRepository _categoriesRepository;
         public ICategoriesRepository CategoryRepository => _categoriesRepository ??= new CategoriesRepository(_context);
+        private IDocumentsRepository _DocumentsRepository;
+        public IDocumentsRepository DocumentRepository => _DocumentsRepository ??= new DocumentsRepository(_context);
 
         public UnitOfWork(LaJuanaDbContext context)
         {
@@ -22,6 +24,8 @@ namespace LaJuana.Infrastructure.Repositories
         }
 
         public LaJuanaDbContext LaJuanaDbContext => _context;
+
+        
 
         public async Task<int> Complete()
         {

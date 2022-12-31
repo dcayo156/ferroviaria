@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Models;
 using LaJuana.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace LaJuana.Application.Features.Programs.Commands.CreatePrograms
 {
@@ -12,34 +14,23 @@ namespace LaJuana.Application.Features.Programs.Commands.CreatePrograms
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateProgramsCommand> _logger;
-        private readonly IHelpersDocument _helpersDocument;
-        //private readonly DirectoryIconSettings _directoryIconSettings;
+        private readonly IDocumentService _directoryIconService;
         public CreateProgramsCommandHandler(IUnitOfWork unitOfWork,
             IMapper mapper,
             ILogger<CreateProgramsCommand> logger,
-            IHelpersDocument helpersDocument)
-        //DirectoryIconSettings directoryIconSettings)
+            IDocumentService directoryIconService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
-            _helpersDocument =helpersDocument;
-            //_directoryIconSettings = directoryIconSettings; 
+            _directoryIconService = directoryIconService; 
         }
 
         public async Task<Guid> Handle(CreateProgramsCommand request, CancellationToken cancellationToken)
         {
             if (request == null) { throw new Exception("El objeto es null"); }
 
-            var base64 = request.File.Split(',')[1];
-
-            var directoryPath = "C:\\Programs\\Icon";
-
-            var filePath = directoryPath + "\\" + request.IconName;
-
-            _helpersDocument.CheckDirectory(directoryPath);
-
-            await _helpersDocument.SaveFile(base64, filePath);           
+            var filePath = await _directoryIconService.SaveIcon(request.IconName, request.File);                   
 
             request.FilePath = filePath;
 

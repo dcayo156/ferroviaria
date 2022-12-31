@@ -14,8 +14,7 @@ namespace LaJuana.Application.Features.Categories.Commands.CreateCategories
        
         public CreateCategoriesCommandHandler(IUnitOfWork unitOfWork,
             IMapper mapper,
-            ILogger<CreateCategoriesCommand> logger,
-            IHelpersDocument helpersDocument)
+            ILogger<CreateCategoriesCommand> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

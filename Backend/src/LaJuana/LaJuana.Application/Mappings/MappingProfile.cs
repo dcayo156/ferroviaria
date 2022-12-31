@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using LaJuana.Application.Features.Categories.Commands.CreateCategories;
 using LaJuana.Application.Features.Categories.Commands.UpdateCategories;
+using LaJuana.Application.Features.Documents.Commands.CreateDocuments;
+using LaJuana.Application.Features.Documents.Commands.UpdateDocuments;
 using LaJuana.Application.Features.Programs.Commands.CreatePrograms;
 using LaJuana.Application.Features.Programs.Commands.UpdatePrograms;
 using LaJuana.Application.Models.ViewModels;
@@ -19,6 +21,10 @@ namespace LaJuana.Application.Mappings
             CreateMap<Category, CategoriesFullVm>();
             CreateMap<CreateCategoriesCommand, Category>();
             CreateMap<UpdateCategoriesCommand, Category>();
+
+            CreateMap<Document, DocumentsFullVm>();
+            CreateMap<CreateDocumentsCommand, Document>();
+            CreateMap<UpdateDocumentsCommand, Document>();
         }
     }
 }
