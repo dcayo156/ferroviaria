@@ -6,6 +6,7 @@ const PersonEdit = Loadable(lazy(() => import('../views/Person/Edit')));
 // const PersonCreate = Loadable(lazy(() => import('../views/Person/Create')));
 const CreateAccessProgram = Loadable(lazy(() => import('../views/AccessProgram/Create')));
 const IndexAccessProgram = Loadable(lazy(() => import('../views/AccessProgram')));
+const IndexAccessProgramEdit = Loadable(lazy(() => import('../views/AccessProgram/Edit')));
 
 const AccessProgramRoute = {
     path: '/access-program',
@@ -25,7 +26,7 @@ const AccessProgramRoute = {
         },
         {
             path: '/access-program/:id/edit',
-            element: <PersonEdit/>
+            element: <IndexAccessProgramEdit/>
         },
     ]
  };

@@ -49,7 +49,7 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
           
         };
         const onClickEditUser = (id: string) => {
-          navigate(`/User/${id}/edit`);
+          navigate(`/access-program/${id}/edit`);
         };
         const onClickChangePasswordUser = (id: string) => {
           navigate(`/auth/change-password/${id}`);

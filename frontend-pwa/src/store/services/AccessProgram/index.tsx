@@ -9,7 +9,7 @@ export const accessProgramApi = createApi({
     baseQuery:baseQueryWithReauth ,
     endpoints: (builder) => ({
         getFindProgramById: builder.query<IAccessProgram, string|null>({
-            query: (id: string | null) => `Programs/FindProgramById/${id}`,
+            query: (id: string | null) => `Programs/FindProgramsById/${id}`,
             providesTags:[{type:"AccessProgram", id:"Find"}]
         }),
         getListProgram: builder.query<IAccessProgram[], void>({
@@ -30,7 +30,7 @@ export const accessProgramApi = createApi({
             }),
             invalidatesTags: (result, error, id ) => [{ type: 'AccessProgram', id:"List" }],
         }),
-        updateProgram: builder.mutation<IAccessProgram, Partial<IAccessProgram>>({
+        updateProgram: builder.mutation<IAccessProgram, IAccessProgram>({
             query: (accessProgram) => ({
                 url: 'Programs/UpdatePrograms',
                 method: "PUT",
@@ -51,6 +51,7 @@ export const accessProgramApi = createApi({
 export const { 
     useGetFindProgramByIdQuery, 
     useGetListProgramQuery,
+    useGetFileProgramQuery,
     useCreateProgramMutation,
     useUpdateProgramMutation,
     useDeleteProgramMutation

@@ -4,17 +4,37 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Box, Button, Container, CssBaseline, FormLabel, Grid,  TextField } from '@mui/material';
 import { IAccessProgram } from '../../../store/types/AccessProgram';
 import defaultIcon from '../../../../src/assets/img/default-icon.png'
+import { useGetFileProgramQuery } from '../../../store/services/AccessProgram';
+import { URL_API_V1 } from "../../../store/services";
 interface FormAccessProgramProps {
     accessprogram: IAccessProgram
     setAccessProgram: (value: React.SetStateAction<IAccessProgram>) => void
     isCreate:boolean
 }
+const toDataURL = (url:any) => fetch(url)
+  .then(response => response.blob())
+  .then(blob => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onloadend = () => resolve(reader.result)
+    reader.onerror = reject
+    reader.readAsDataURL(blob)
+  }))
 const FormAccessProgram: React.FunctionComponent<FormAccessProgramProps> = ({ accessprogram, setAccessProgram, isCreate }) => {
     const [errorPassword,setErrorPassword] = React.useState<boolean>(false);
     const [errorConfirmPassword,setErrorConfirmPassword] = React.useState<boolean>(false);
-    
-    
    const [image,setImage]=React.useState< string | undefined >("");
+   
+    React.useEffect(()=>{
+        if(!isCreate && accessprogram.id != ""){
+            toDataURL(`${URL_API_V1}Programs/FindProgramsFileById/${accessprogram.id}`)
+            .then(dataUrl => {
+                if(dataUrl){
+                    setImage(dataUrl as string);
+                    setAccessProgram({ ...accessprogram, file:dataUrl as string }) 
+                }
+            })
+        }
+    },[accessprogram.id]);
    const onFileChange= (e:any) => {
         var file =  e.target.files[0];
         if(file){
