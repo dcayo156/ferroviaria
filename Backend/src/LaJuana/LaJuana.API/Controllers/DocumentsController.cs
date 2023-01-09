@@ -32,7 +32,7 @@ namespace LaJuana.API.Controllers
         }
         [HttpPost("CreateDocumentsFile")]
         //[Authorize]
-        public async Task<ActionResult<string>> CreateDocumentsFile([FromBody] CreateDocumentsFileCommand command)
+        public async Task<ActionResult<FileDirectoryResponseVm>> CreateDocumentsFile([FromBody] CreateDocumentsFileCommand command)
         {
             return await _mediator.Send(command);
         }

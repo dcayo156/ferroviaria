@@ -8,6 +8,7 @@ import AuthRoutes from './AuthRoutes';
 import UserRoutes from './UserRoutes';
 import AccessProgramRoute from './AccessProgram';
 import CategoryRoute from './Category';
+import DocumentRoute from './Document';
 
 const Login = Loadable(lazy(() => import('../components/Security/Login')));
 
@@ -25,6 +26,7 @@ export default function ThemeRoutes() {
     MainRoutes,
     AccessProgramRoute,
     CategoryRoute,
+    DocumentRoute,
     AuthenticationRoutes,
     AuthRoutes,
     UserRoutes]);

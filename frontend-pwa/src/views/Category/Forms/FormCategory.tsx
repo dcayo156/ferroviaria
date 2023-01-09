@@ -83,7 +83,7 @@ const FormCategory: React.FunctionComponent<FormCategoryProps> = ({ category, se
                         Seleccione una opcion
                         </MenuItem>
                         {
-                            categoryData?.map(cat=>{
+                            categoryData?.filter(cat=>cat.parentCategoryId!=undefined).map(cat=>{
                                 return <MenuItem
                                 key={cat.id}
                                 value={cat.id}
