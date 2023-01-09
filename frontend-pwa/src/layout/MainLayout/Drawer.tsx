@@ -3,6 +3,7 @@ import * as React from 'react';
 import LinkTo from './ItemTo';
 import HomeIcon from '@mui/icons-material/Home';
 import UserIcon from '@mui/icons-material/People';
+import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
 import MapIcon from '@mui/icons-material/Map';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
@@ -87,8 +88,8 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
         <LinkTo to="/category" text="Categorias" open={open} active={uri.includes("/category")} switchOpen={switchOpen}>
             <AutoStoriesIcon />
         </LinkTo>
-        <LinkTo to="/relationship/relationshipType" text="Document" open={open} active={uri.includes("/relationship/relationshipType")} switchOpen={switchOpen}>
-            <UserIcon />
+        <LinkTo to="/document" text="Documentos" open={open} active={uri.includes("/document")} switchOpen={switchOpen}>
+            <FileCopySharpIcon />
         </LinkTo>
         <LinkTo to="/person" text="Personas" open={open} active={uri.includes("/person")} switchOpen={switchOpen}>
             <UserIcon />

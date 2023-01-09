@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { useGetListProgramQuery, useDeleteProgramMutation } from '../../store/services/AccessProgram'
-import { IAccessProgram } from "../../store/types/AccessProgram";
+import { useGetListDocumentQuery, useDeleteDocumentMutation } from '../../store/services/Document'
+import { IDocument } from "../../store/types/Document";
 import MainCard from "../../components/cards/MainCard";
 import CardButton from "../../components/cards/CardButton";
 import { LinearProgress } from "@mui/material";
@@ -13,29 +13,48 @@ import { URL_API_V1 } from "../../store/services";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DownloadOutlineIcon from '@mui/icons-material/DownloadOutlined';
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { hasError } from "../../components/Security/ErrorManager";
-interface ListAccessProgramProps {}
-const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () => {
-  const { data: accessProgramData, error, isLoading } = useGetListProgramQuery();
-  const [deleteProgram]=useDeleteProgramMutation();
+interface ListDocumentProps {}
+const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
+  const { data: documentData, error, isLoading } = useGetListDocumentQuery();
+  const [deleteDocument]=useDeleteDocumentMutation();
   const navigate = useNavigate();
-  
+
   const columnsDataGrid: GridColDef[] = [
     { field: "id", headerName: "ID", minWidth: 15, hide: true},
-    { field: "name", headerName: "Name", minWidth: 170, flex:1  },
-    { field: "url", headerName: "URL", minWidth: 170 , flex:1 },
-    { field: "iconname", headerName: "Icon", minWidth: 100, flex:1,
+    { field: "fileName", headerName: "Nombre File", minWidth: 200, flex:1  },
+    { field: "filePath", headerName: "Donwload", minWidth: 50, flex:1,
       sortable: false,
       filterable:false,
       hideable:false,
       disableColumnMenu:true,
       renderCell: (params) => {
-        return <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%",width:"100%"}}>
-            <img style={{height:"90%"}} src={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`} alt={`${params.row.iconName}`} title={`${params.row.iconName}`} />
-        </div>
-        
+        return  <IconButton
+                  download
+                  href={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`}
+                  color="secondary"    
+                  title="Descargar">    
+                  <DownloadOutlineIcon />           
+                </IconButton>
+      }
+    },
+    { field: "photoName", headerName: "Nombre Image", minWidth: 200, flex:1  },
+    { field: "photoPath", headerName: "Donwload", minWidth: 50, flex:1,
+      sortable: false,
+      filterable:false,
+      hideable:false,
+      disableColumnMenu:true,
+      renderCell: (params) => {
+        return  <IconButton
+                  download
+                  href={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`}
+                  color="secondary"    
+                  title="Descargar">    
+                  <DownloadOutlineIcon />           
+                </IconButton>
       }
     },
     {
@@ -49,8 +68,8 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
       disableColumnMenu:true,
       renderCell: (params) => {
         
-          const onDeleteProgram = (id: string) => {
-            deleteProgram(id).then((response: { data: string; } | { error: FetchBaseQueryError | SerializedError; })=>{
+          const onDeleteDocument = (id: string) => {
+            deleteDocument(id).then((response: { data: string; } | { error: FetchBaseQueryError | SerializedError; })=>{
                 if (hasError(response, "Error al momento de eliminar categoria")) {
                     return;
                 }
@@ -61,12 +80,12 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
          }
         
         const onClickEditUser = (id: string) => {
-          navigate(`/access-program/${id}/edit`);
+          navigate(`/documents/${id}/edit`);
         };
-        const onClickDeleteProgram = (id: string) => {
+        const onClickDeleteDocument = (id: string) => {
           const b=window.confirm("Esta seguro de eliminar esta categoria?")
             if(b){
-              onDeleteProgram(id);
+              onDeleteDocument(id);
             }else{
               toast.success("Operacion Cancelada")
             }
@@ -83,7 +102,7 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
             </IconButton>
             <IconButton
               onClick={() => {
-                onClickDeleteProgram(params.row.id);
+                onClickDeleteDocument(params.row.id);
               }}
               color="secondary"    
               title="Delete"        >
@@ -97,9 +116,9 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
 
   return (
     <MainCard
-      title="Access Program"
+      title= "Document"
       secondary={
-        <CardButton type="plus" title="Create Access" link="/access-program/create" />
+        <CardButton type="plus" title="Create Document" link="/document/create" />
       }
     >
       {isLoading ? (
@@ -107,7 +126,7 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
       ) : (
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={accessProgramData !== undefined ? (accessProgramData as IAccessProgram[]) : []}
+            rows={documentData !== undefined ? (documentData as IDocument[]) : []}
             columns={columnsDataGrid}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -119,4 +138,4 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
   );
 };
 
-export default ListAccessProgram;
+export default ListDocument;

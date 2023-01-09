@@ -5,10 +5,11 @@ using LaJuana.Application.Exceptions;
 using LaJuana.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using LaJuana.Application.Models.ViewModels;
 
 namespace LaJuana.Application.Features.Documents.Commands.CreateFileDocuments
 {
-    public class CreateDocumentsFileCommandHandler : IRequestHandler<CreateDocumentsFileCommand, string>
+    public class CreateDocumentsFileCommandHandler : IRequestHandler<CreateDocumentsFileCommand, FileDirectoryResponseVm>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ namespace LaJuana.Application.Features.Documents.Commands.CreateFileDocuments
             _documentService = documentService;
         }
 
-        public async Task<string> Handle(CreateDocumentsFileCommand request, CancellationToken cancellationToken)
+        async Task<FileDirectoryResponseVm> IRequestHandler<CreateDocumentsFileCommand, FileDirectoryResponseVm>.Handle(CreateDocumentsFileCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -41,7 +42,11 @@ namespace LaJuana.Application.Features.Documents.Commands.CreateFileDocuments
                                  request.FileName,
                                  request.File,
                                  request.IsFile);
-                return pathFile;
+                FileDirectoryResponseVm res= new FileDirectoryResponseVm() {
+                    FileName= request.FileName,
+                    FilePath= pathFile
+                };
+                return res;
             }
             catch (Exception ex)
             {
