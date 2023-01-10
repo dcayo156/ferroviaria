@@ -81,13 +81,12 @@ namespace LaJuana.API.Controllers
             return Ok(Documents);
         }
 
-        [HttpGet("FindDocumentsFileById")]
-        //[Authorize]
-        [ProducesResponseType(typeof(DocumentsFullVm), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<string>> FindDocumentsFileById([FromBody] FindDocumentsFileByIdQuery command)
+        [HttpGet("FindDocumentsFileById/{id}")]
+        public async Task<ActionResult<string>> FindDocumentsFileById(string id, bool isFile)
         {
-            var fileBase64 = await _mediator.Send(command);
-            return File(Convert.FromBase64String(fileBase64), "image/png");
+            FindDocumentsFileByIdQuery command = new FindDocumentsFileByIdQuery(new Guid(id), isFile);
+            var documentFileVm = await _mediator.Send(command);
+            return File(Convert.FromBase64String(documentFileVm.File), documentFileVm.MimeType);
         }
     }
 }
