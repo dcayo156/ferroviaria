@@ -132,7 +132,6 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
     action={null}>
     <Container sx={{pb:3}}
         component="main" maxWidth="xs" >
-        <CssBaseline />
         <Box
             sx={{
                 marginTop: 2,

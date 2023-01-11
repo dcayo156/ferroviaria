@@ -10,7 +10,7 @@ export const documentApi = createApi({
     endpoints: (builder) => ({
         getFindDocumentById: builder.query<IDocument, string|null>({
             query: (id: string | null) => `Documents/FindDocumentsById/${id}`,
-            providesTags:[{type:"Document", id:"Find"}]
+            providesTags:[{type:"Document", id:"List"}],
         }),
         getListDocument: builder.query<IDocument[], void>({
             query: () => `Documents/GetDocuments`,

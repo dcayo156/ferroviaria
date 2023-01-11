@@ -21,3 +21,9 @@ export interface IDocumentImageResponse  {
     filePath: string,
     fileName: string
 }
+
+
+export interface IDocumentOptions  {
+    categoryId: string,
+    subCategoryId: string
+}

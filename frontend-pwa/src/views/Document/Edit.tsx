@@ -26,6 +26,8 @@ export default function DocumentEdit() {
         subCategoryId: ""
     });
     React.useEffect(()=>{
+        console.log("data en document");
+        console.log(data);
         if(data!=undefined){
             setDocument({
                 id:data.id,
@@ -43,7 +45,7 @@ export default function DocumentEdit() {
     const saveChanges = () => { 
         setIsLoading(true)
         const useToCreate: IDocument = {
-            id:"",
+            id:document.id,
             fileName: document.fileName,
             filePath: document.filePath,
             photoName: document.photoName,
@@ -53,8 +55,8 @@ export default function DocumentEdit() {
           };
           updateDocument(useToCreate).then((response: { data: IDocument } | { error: FetchBaseQueryError | SerializedError; })=>{
             if("data" in response){
-                toast.success("Registro exitoso");
-                navigate("/access-program");
+                toast.success("Edicion exitosa");
+                navigate("/document");
             }
             if("error" in response){
                 if("message" in response.error)
@@ -67,9 +69,9 @@ export default function DocumentEdit() {
     }
     return (
     <MainCard 
-        title="Registrar Acceso de Documenta" 
+        title="Editar registro de documento" 
         secondary={
-            <CardButton type="back" title="Lista de Acceso a Documentas" link="/access-program" />}
+            <CardButton type="back" title="Lista de Documentos" link="/document" />}
     >{
         <>
         <FormDocument document={document} setDocument={setDocument} isCreate= {false}/>

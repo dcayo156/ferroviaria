@@ -82,7 +82,7 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
         <LinkTo to="/main/home" text="Home" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
             <HomeIcon/>
         </LinkTo>
-        <LinkTo to="/access-program" text="Acceso a programas" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
+        <LinkTo to="/access-program" text="Programas" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
             <MapIcon/>
         </LinkTo>
         <LinkTo to="/category" text="Categorias" open={open} active={uri.includes("/category")} switchOpen={switchOpen}>
@@ -90,9 +90,6 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
         </LinkTo>
         <LinkTo to="/document" text="Documentos" open={open} active={uri.includes("/document")} switchOpen={switchOpen}>
             <FileCopySharpIcon />
-        </LinkTo>
-        <LinkTo to="/person" text="Personas" open={open} active={uri.includes("/person")} switchOpen={switchOpen}>
-            <UserIcon />
         </LinkTo>
         <LinkTo to="/user" text="Usuarios" open={open} active={uri.includes("/user")} switchOpen={switchOpen}>
             <UserIcon />

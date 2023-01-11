@@ -25,7 +25,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
             
             {accessProgramData&&
                 accessProgramData?.map(access=>{
-                    return <Grid item xs={4} key={access.id}>
+                    return <Grid item xs={12} md={6} lg={4} key={access.id}>
                         <CardIcon accessProgram={access}/>
                     </Grid>
                 })

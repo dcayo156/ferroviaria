@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useGetListDocumentQuery, useDeleteDocumentMutation } from '../../store/services/Document'
-import { IDocument } from "../../store/types/Document";
+import { IDocument, IDocumentOptions } from "../../store/types/Document";
 import MainCard from "../../components/cards/MainCard";
 import CardButton from "../../components/cards/CardButton";
 import { LinearProgress } from "@mui/material";
@@ -17,15 +17,17 @@ import DownloadOutlineIcon from '@mui/icons-material/DownloadOutlined';
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { hasError } from "../../components/Security/ErrorManager";
+import FormSelectOption from './Forms/FormSelectOption';
 interface ListDocumentProps {}
 const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
   const { data: documentData, error, isLoading } = useGetListDocumentQuery();
   const [deleteDocument]=useDeleteDocumentMutation();
   const navigate = useNavigate();
+  const [options,setOptions]=React.useState<IDocumentOptions>({categoryId:"",subCategoryId:""});
 
   const columnsDataGrid: GridColDef[] = [
     { field: "id", headerName: "ID", minWidth: 15, hide: true},
-    { field: "fileName", headerName: "Nombre File", minWidth: 200, flex:1  },
+    { field: "fileName", headerName: "Nombre File", minWidth: 200, flex:3  },
     { field: "filePath", headerName: "Donwload", minWidth: 50, flex:1,
       sortable: false,
       filterable:false,
@@ -34,14 +36,15 @@ const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
       renderCell: (params) => {
         return  <IconButton
                   download
-                  href={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`}
+                  target="_blank"
+                  href={`${URL_API_V1}Documents/FindDocumentsFileById/${params.row.id}?isfile=true`}
                   color="secondary"    
                   title="Descargar">    
                   <DownloadOutlineIcon />           
                 </IconButton>
       }
     },
-    { field: "photoName", headerName: "Nombre Image", minWidth: 200, flex:1  },
+    { field: "photoName", headerName: "Nombre Image", minWidth: 200, flex:3  },
     { field: "photoPath", headerName: "Donwload", minWidth: 50, flex:1,
       sortable: false,
       filterable:false,
@@ -49,8 +52,10 @@ const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
       disableColumnMenu:true,
       renderCell: (params) => {
         return  <IconButton
+                  disabled={params.row.photoPath==""}
                   download
-                  href={`${URL_API_V1}Programs/FindProgramsFileById/${params.row.id}`}
+                  target="_blank"
+                  href={`${URL_API_V1}Documents/FindDocumentsFileById/${params.row.id}?isfile=false`}
                   color="secondary"    
                   title="Descargar">    
                   <DownloadOutlineIcon />           
@@ -70,20 +75,20 @@ const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
         
           const onDeleteDocument = (id: string) => {
             deleteDocument(id).then((response: { data: string; } | { error: FetchBaseQueryError | SerializedError; })=>{
-                if (hasError(response, "Error al momento de eliminar categoria")) {
+                if (hasError(response, "Error al momento de eliminar Documento")) {
                     return;
                 }
                 if ("data" in response) {
-                    toast.success(`La categoria ha sido eliminado existosamente`);
+                    toast.success(`El Documento ha sido eliminado existosamente`);
                 }
             });
          }
         
         const onClickEditUser = (id: string) => {
-          navigate(`/documents/${id}/edit`);
+          navigate(`/document/${id}/edit`);
         };
         const onClickDeleteDocument = (id: string) => {
-          const b=window.confirm("Esta seguro de eliminar esta categoria?")
+          const b=window.confirm("Esta seguro de eliminar este Documento?")
             if(b){
               onDeleteDocument(id);
             }else{
@@ -124,15 +129,21 @@ const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
       {isLoading ? (
         <LinearProgress color="secondary" />
       ) : (
-        <Box sx={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={documentData !== undefined ? (documentData as IDocument[]) : []}
-            columns={columnsDataGrid}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            disableSelectionOnClick
-          />
-        </Box>
+        <>
+          <Box sx={{ height: 80, width: "100%" }}>
+            <FormSelectOption document={options} setDocument={setOptions}/>
+          </Box>
+          <Box sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={documentData !== undefined && options.subCategoryId!="" ? (documentData.filter(doc=>doc.subCategoryId==options.subCategoryId) as IDocument[]) : []}
+              columns={columnsDataGrid}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              disableSelectionOnClick
+            />
+          </Box>
+        </>
+        
       )}
     </MainCard>
   );
