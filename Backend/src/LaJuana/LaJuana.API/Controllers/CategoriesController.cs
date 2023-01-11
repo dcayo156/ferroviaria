@@ -3,6 +3,7 @@ using LaJuana.Application.Features.Categories.Commands.DeleteCategories;
 using LaJuana.Application.Features.Categories.Commands.UpdateCategories;
 using LaJuana.Application.Features.Categories.Queries.FindCategoriesById;
 using LaJuana.Application.Features.Categories.Queries.GetListCategories;
+using LaJuana.Application.Features.Categories.Queries.GetListChildrenCategories;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,15 @@ namespace LaJuana.API.Controllers
         public async Task<ActionResult<IEnumerable<CategoriesFullVm>>> GetCategoriess()
         {
             var query = new GetListCategoriesQuery();
+            var Categoriess = await _mediator.Send(query);
+            return Ok(Categoriess);
+        }
+        [HttpGet("GetCategoriesChildren")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<CategoriesChildrenFullVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<CategoriesChildrenFullVm>>> GetCategoriesChildren()
+        {
+            var query = new GetListChildrenCategoriesQuery();
             var Categoriess = await _mediator.Send(query);
             return Ok(Categoriess);
         }

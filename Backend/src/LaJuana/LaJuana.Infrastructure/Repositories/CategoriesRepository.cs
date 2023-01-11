@@ -11,11 +11,18 @@ namespace LaJuana.Infrastructure.Repositories
         {
 
         }
-        public async Task<IEnumerable<Category>> GetListCategories()
+        public async Task<List<Category>> GetListCategories()
         {
-            return await _context.Categories!
-                .Include(c => c.ParentCategory)
+            return await _context.Categories
+                .Include(c=> c.ParentCategory)
                 .OrderBy(p => p.Name)  
+                .ToListAsync();
+
+        }
+        public async Task<List<Category>> FindByIdSubCategoryAsync(Guid Id)
+        {
+            return await _context.Categories!.Where(c => c.ParentCategoryId == Id)
+                .OrderBy(p => p.Name)
                 .ToListAsync();
 
         }

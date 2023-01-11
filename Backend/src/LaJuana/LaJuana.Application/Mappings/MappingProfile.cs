@@ -19,6 +19,7 @@ namespace LaJuana.Application.Mappings
             CreateMap<UpdateProgramsCommand, Program>();
 
             CreateMap<Category, CategoriesFullVm>();
+            CreateMap<Category, CategoriesChildrenFullVm>();
             CreateMap<CreateCategoriesCommand, Category>();
             CreateMap<UpdateCategoriesCommand, Category>();
 
