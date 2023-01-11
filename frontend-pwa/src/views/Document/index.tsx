@@ -121,9 +121,9 @@ const ListDocument: React.FunctionComponent<ListDocumentProps> = () => {
 
   return (
     <MainCard
-      title= "Document"
+      title= "Documentos"
       secondary={
-        <CardButton type="plus" title="Create Document" link="/document/create" />
+        <CardButton type="plus" title="Crear Documento" link="/document/create" />
       }
     >
       {isLoading ? (

@@ -29,6 +29,8 @@ namespace LaJuana.Application.Features.Documents.Queries.FindDocumentsFileById
                 {
                     File = file,
                     MimeType = mimeType,
+                    FilePath = filePath,
+                    FileName = request.isFile ? document.FileName : document.PhotoName,
                 };
                 return documentFileVm;
             }

@@ -43,7 +43,7 @@ const FormSelectOption: React.FunctionComponent<FormSelectOptionProps> = ({ docu
           sx={{flex: 1 }}
       >
           <FormControl sx={{ width: "100%",pb:2 }}>
-              <InputLabel id="select-category-label-1">Categoria Padre</InputLabel>
+              <InputLabel id="select-category-label-1">Categoría Padre</InputLabel>
                   <Select
                   id="select-category-1"
                   value={document.categoryId || '' }
@@ -56,7 +56,7 @@ const FormSelectOption: React.FunctionComponent<FormSelectOptionProps> = ({ docu
                       key="undefiend"
                       value={undefined}
                       >
-                      Seleccione una Categoria
+                      Seleccione una Categoría
                       </MenuItem>
                       {
                           categoryData?.filter(cat=>cat.parentCategoryId==undefined).map(cat=>{
@@ -77,7 +77,7 @@ const FormSelectOption: React.FunctionComponent<FormSelectOptionProps> = ({ docu
           sx={{ flex: 1 }}
       >
           <FormControl sx={{ width: "100%",pb:2 }}>
-              <InputLabel id="select-category-label-2">Categoria hijo</InputLabel>
+              <InputLabel id="select-category-label-2">Categoría hijo</InputLabel>
                   <Select
                   id="select-category-2"
                   value={document.subCategoryId || '' }
@@ -90,7 +90,7 @@ const FormSelectOption: React.FunctionComponent<FormSelectOptionProps> = ({ docu
                       key="undefiend"
                       value={undefined}
                       >
-                      Seleccione una Subcategoria
+                      Seleccione una Subcategoría
                       </MenuItem>
                       {
                           categoryData?.filter(cat=>cat.parentCategoryId==document.categoryId).map(cat=>{

@@ -64,15 +64,15 @@ const FormCategory: React.FunctionComponent<FormCategoryProps> = ({ category, se
                     value={category!.name}
                     onChange={({ target: { value } }) => setCategory({ ...category, "name": value })}
                 />  
-                    <FormControlLabel onChange={()=>setEnabledSelect(!enableSelect)} control={<Checkbox checked={enableSelect} />} label="es subcategoria?" />
+                    <FormControlLabel onChange={()=>setEnabledSelect(!enableSelect)} control={<Checkbox checked={enableSelect} />} label="es subcategoría?" />
                     <FormControl sx={{ width: "100%" }}>
-                    <InputLabel id="select-categoryl">Categoria Padre</InputLabel>
+                    <InputLabel id="select-categoryl">Categoría Padre</InputLabel>
                     <Select
                     disabled={!enableSelect}
                     id="select-category"
                     value={category.parentCategoryId || '' }
                     onChange={handleChangeSelect}
-                    input={<OutlinedInput label="Categoria Padre" />}
+                    input={<OutlinedInput label="Categoría Padre" />}
                     MenuProps={MenuProps}
                     name={"parentCategoryId"}
                     >
@@ -80,7 +80,7 @@ const FormCategory: React.FunctionComponent<FormCategoryProps> = ({ category, se
                         key="undefiend"
                         value={undefined}
                         >
-                        Seleccione una opcion
+                        Seleccione una opción
                         </MenuItem>
                         {
                             categoryData?.filter(cat=>cat.parentCategoryId==undefined).map(cat=>{

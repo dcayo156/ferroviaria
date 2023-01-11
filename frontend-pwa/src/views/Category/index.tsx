@@ -91,9 +91,9 @@ const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
 
   return (
     <MainCard
-      title="Categorias"
+      title="Categorías"
       secondary={
-        <CardButton type="plus" title="Crear Categoria" link="/category/create" />
+        <CardButton type="plus" title="Crear Categoría" link="/category/create" />
       }
     >
       {isLoading ? (

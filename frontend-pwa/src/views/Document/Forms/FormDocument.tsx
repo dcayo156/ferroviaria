@@ -151,7 +151,7 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
                         id="select-category-1"
                         value={document.categoryId || '' }
                         onChange={handleChangeParentSelect}
-                        input={<OutlinedInput label="Categoria Padre" />}
+                        input={<OutlinedInput label="Categoría Padre" />}
                         MenuProps={MenuProps}
                         name={"parentCategoryId"}
                         >
@@ -159,7 +159,7 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
                             key="undefiend"
                             value={undefined}
                             >
-                            Seleccione una Categoria
+                            Seleccione una Categoría
                             </MenuItem>
                             {
                                 categoryData?.filter(cat=>cat.parentCategoryId==undefined).map(cat=>{
@@ -174,12 +174,12 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
                         </Select>
                 </FormControl>
                 <FormControl sx={{ width: "100%",pb:2 }}>
-                    <InputLabel id="select-category-label-2">Categoria hijo</InputLabel>
+                    <InputLabel id="select-category-label-2">Categoría hijo</InputLabel>
                         <Select
                         id="select-category-2"
                         value={document.subCategoryId || '' }
                         onChange={handleChangeChildrenSelect}
-                        input={<OutlinedInput label="Categoria hijo" />}
+                        input={<OutlinedInput label="Categoría hijo" />}
                         MenuProps={MenuProps}
                         name={"subCategoryId"}
                         >
@@ -187,7 +187,7 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
                             key="undefiend"
                             value={undefined}
                             >
-                            Seleccione una Subcategoria
+                            Seleccione una Subcategoría
                             </MenuItem>
                             {
                                 categoryData?.filter(cat=>cat.parentCategoryId==document.categoryId).map(cat=>{

@@ -48,9 +48,9 @@ export default function Register() {
     }
     return (
     <MainCard 
-        title="Registrar Categoria" 
+        title="Registrar Categoría" 
         secondary={
-            <CardButton type="back" title="Lista de Categorias" link="/category" />}
+            <CardButton type="back" title="Lista de Categorías" link="/category" />}
     >{
         <>
         <FormCategory category={category} setCategory={setCategory} isCreate= {true}/>

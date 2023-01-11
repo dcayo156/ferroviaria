@@ -79,13 +79,13 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
     </DrawerHeader>
     <Divider />
     <List>
-        <LinkTo to="/main/home" text="Home" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
+        <LinkTo to="/main/home" text="Inicio" open={open} active={uri.includes("/main/home")} switchOpen={switchOpen}>
             <HomeIcon/>
         </LinkTo>
         <LinkTo to="/access-program" text="Programas" open={open} active={uri.includes("/access-program")} switchOpen={switchOpen}>
             <MapIcon/>
         </LinkTo>
-        <LinkTo to="/category" text="Categorias" open={open} active={uri.includes("/category")} switchOpen={switchOpen}>
+        <LinkTo to="/category" text="Categorías" open={open} active={uri.includes("/category")} switchOpen={switchOpen}>
             <AutoStoriesIcon />
         </LinkTo>
         <LinkTo to="/document" text="Documentos" open={open} active={uri.includes("/document")} switchOpen={switchOpen}>

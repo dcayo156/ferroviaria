@@ -97,9 +97,9 @@ const ListAccessProgram: React.FunctionComponent<ListAccessProgramProps> = () =>
 
   return (
     <MainCard
-      title="Access Program"
+      title="Acceso de Programas"
       secondary={
-        <CardButton type="plus" title="Create Access" link="/access-program/create" />
+        <CardButton type="plus" title="Crear Acceso" link="/access-program/create" />
       }
     >
       {isLoading ? (

@@ -8,6 +8,7 @@ using LaJuana.Application.Features.Documents.Queries.GetListDocuments;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Net;
 
 namespace LaJuana.API.Controllers
@@ -86,7 +87,7 @@ namespace LaJuana.API.Controllers
         {
             FindDocumentsFileByIdQuery command = new FindDocumentsFileByIdQuery(new Guid(id), isFile);
             var documentFileVm = await _mediator.Send(command);
-            return File(Convert.FromBase64String(documentFileVm.File), documentFileVm.MimeType);
+            return File(System.IO.File.OpenRead(documentFileVm.FilePath), documentFileVm.MimeType, documentFileVm.FileName);
         }
     }
 }
