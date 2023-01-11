@@ -5,6 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public Guid? ParentCategoryId { get; set; }
+        public CategoriesFullVm ParentCategory { get; set; }
         public virtual IList<CategoriesChildrenFullVm>? Categories { get; set; }
     }
 }

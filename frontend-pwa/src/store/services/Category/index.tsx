@@ -1,5 +1,5 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
-import { ICategory,ICategoryWithParent } from '../../types/Category';
+import { ICategory,ICategoryWithParent,ICategoryWithChildren } from '../../types/Category';
 import { baseQueryWithReauth } from '../FetchBaseQuery';
 
 
@@ -17,6 +17,12 @@ export const categoryApi = createApi({
             providesTags:[{type:"Category", id:"List"}],
             
         }),
+        getListCategoriesWithChildren: builder.query<ICategoryWithChildren[], void>({
+            query: () => `Categories/GetCategoriesChildren`,
+            providesTags:[{type:"Category", id:"List"}],
+            
+        }),
+        
         createCategory: builder.mutation<string,ICategory>({
             query: (categoryWithTags) => ({
                 url: 'Categories/CreateCategories',
@@ -46,6 +52,7 @@ export const categoryApi = createApi({
 export const { 
     useGetFindCategoryByIdQuery, 
     useGetListCategoryQuery,
+    useGetListCategoriesWithChildrenQuery,
     useCreateCategoryMutation,
     useUpdateCategoryMutation,
     useDeleteCategoryMutation

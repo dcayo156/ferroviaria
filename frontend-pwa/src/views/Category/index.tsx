@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { useGetListCategoryQuery,useDeleteCategoryMutation } from '../../store/services/Category'
-import { ICategory,ICategoryWithParent } from "../../store/types/Category";
+import { useGetListCategoryQuery,useDeleteCategoryMutation,useGetListCategoriesWithChildrenQuery } from '../../store/services/Category'
+import { ICategoryWithChildren,ICategoryWithParent } from "../../store/types/Category";
 import MainCard from "../../components/cards/MainCard";
 import CardButton from "../../components/cards/CardButton";
 import { LinearProgress } from "@mui/material";
@@ -18,7 +18,7 @@ import { hasError } from '../../components/Security/ErrorManager';
 
 interface ListCategoryProps {}
 const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
-  const { data: categoryData, error, isLoading } = useGetListCategoryQuery();
+  const { data: categoryData, error, isLoading } = useGetListCategoriesWithChildrenQuery();
   const [ deleteCategory,
     { isLoading: isDeleting }, ] = useDeleteCategoryMutation();
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const ListCategory: React.FunctionComponent<ListCategoryProps> = () => {
       ) : (
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={categoryData !== undefined ? (categoryData as ICategoryWithParent[]) : []}
+            rows={categoryData !== undefined ? (categoryData.reduce((acumulador,cat:any)=>{acumulador=acumulador.concat(cat);if(cat.categories?.length>0)acumulador=acumulador.concat(cat.categories);return acumulador},[]) as ICategoryWithChildren[]) : []}
             columns={columnsDataGrid}
             pageSize={5}
             rowsPerPageOptions={[5]}

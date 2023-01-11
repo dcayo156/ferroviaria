@@ -10,3 +10,10 @@ export interface ICategoryWithParent {
     parentCategoryId:string|undefined
     parentCategory:ICategory|null
 }
+export interface ICategoryWithChildren {
+    id: string
+    name: string|undefined
+    parentCategoryId:string|undefined
+    parentCategory:ICategory|null
+    categories:ICategoryWithChildren[]|null
+}
