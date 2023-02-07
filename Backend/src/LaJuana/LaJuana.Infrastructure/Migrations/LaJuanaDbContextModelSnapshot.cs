@@ -111,6 +111,176 @@ namespace LaJuana.Infrastructure.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("LaJuana.Domain.InspectionTrain", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AspectoBasicoCuatroNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoCuatroObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoCuatroSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoDosNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoDosObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoDosSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoTresNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoTresObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoTresSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoUnoNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoUnoObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoBasicoUnoSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoCincoNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoCincoObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoCincoSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoDiezNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoDiezObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoDiezSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoNueveNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoNueveObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoNueveSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoOchoNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoOchoObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoOchoSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSeisNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSeisObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSeisSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSieteNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSieteObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspectoTecnicoSieteSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuxiliarMaquina")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Fecha")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Locomotoras")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Maquinista")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoDoceObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoDoceSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoDoceeNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoOnceNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoOnceObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoOnceSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoTreceNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoTreceObservacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MenejoAdecuadoTreceSi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumeroTren")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ObservacionEvaluador")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InspectionTrains");
+                });
+
             modelBuilder.Entity("LaJuana.Domain.Program", b =>
                 {
                     b.Property<Guid>("Id")

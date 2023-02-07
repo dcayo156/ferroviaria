@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Exceptions;
-using LaJuana.Application.Features.Documents.Commands.CreateDocuments;
 using LaJuana.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;

@@ -28,4 +28,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\LaJuana.Application\Aspose.Cells.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

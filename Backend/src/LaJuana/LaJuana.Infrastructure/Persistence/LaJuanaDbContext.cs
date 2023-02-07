@@ -44,5 +44,6 @@ namespace LaJuana.Infrastructure.Persistence
         public DbSet<Program>? Programs { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<InspectionTrain> InspectionTrains { get; set; }
     }
 }

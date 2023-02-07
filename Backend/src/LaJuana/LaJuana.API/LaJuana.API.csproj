@@ -27,9 +27,18 @@
     <Content Remove="appsettings.Development.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="DLL\Aspose.Cells.lic" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DLL\Aspose.Cells.lic" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\LaJuana.Application\Aspose.Cells.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

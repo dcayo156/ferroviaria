@@ -97,4 +97,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+Aspose.Cells.License license = new Aspose.Cells.License();
+license.SetLicense("Aspose.Cells.lic");
+
 app.Run();

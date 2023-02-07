@@ -41,7 +41,8 @@ namespace LaJuana.Application.Features.Documents.Commands.CreateFileDocuments
                                  request.FilePath,
                                  request.FileName,
                                  request.File,
-                                 request.IsFile);
+                                 request.IsFile,
+                                 true);
                 FileDirectoryResponseVm res= new FileDirectoryResponseVm() {
                     FileName= request.FileName,
                     FilePath= pathFile

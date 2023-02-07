@@ -1,6 +1,7 @@
 ﻿using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Models;
+using LaJuana.Infrastructure.Apose;
 using LaJuana.Infrastructure.Directories;
 using LaJuana.Infrastructure.Email;
 using LaJuana.Infrastructure.Persistence;
@@ -31,6 +32,7 @@ namespace LaJuana.Infrastructure
             services.AddTransient<ILuceneService, LaJuanaLuceneContext>();
             services.Configure<DirectoryIconSettings>(configuration.GetSection("DirectoryIconSettings"));
             services.AddTransient<IDocumentService, DocumentService>();
+            services.AddTransient<IAposeService, AposeService>();
             return services;
         }
 
