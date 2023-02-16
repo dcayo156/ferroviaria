@@ -9,9 +9,12 @@ import UserRoutes from './UserRoutes';
 import AccessProgramRoute from './AccessProgram';
 import CategoryRoute from './Category';
 import DocumentRoute from './Document';
+import InspectionTrainRoute from './InspectionTrain';
 
 const Login = Loadable(lazy(() => import('../components/Security/Login')));
 
+const rutaServidor = "";//PRUBEA
+//const rutaServidor = "/FO"; //Produccion
 export default function ThemeRoutes() {
     return useRoutes([{
         path: '/',
@@ -29,5 +32,6 @@ export default function ThemeRoutes() {
     DocumentRoute,
     AuthenticationRoutes,
     AuthRoutes,
-    UserRoutes]);
+    UserRoutes,
+    InspectionTrainRoute]);
 }

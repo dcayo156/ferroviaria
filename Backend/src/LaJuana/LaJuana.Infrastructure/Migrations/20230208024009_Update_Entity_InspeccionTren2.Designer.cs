@@ -4,6 +4,7 @@ using LaJuana.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaJuana.Infrastructure.Migrations
 {
     [DbContext(typeof(LaJuanaDbContext))]
-    partial class LaJuanaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230208024009_Update_Entity_InspeccionTren2")]
+    partial class Update_Entity_InspeccionTren2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,10 +212,6 @@ namespace LaJuana.Infrastructure.Migrations
                     b.Property<string>("AuxiliarMaquina")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -400,18 +398,7 @@ namespace LaJuana.Infrastructure.Migrations
                     b.Property<string>("ObservacionEvaluador")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("SubCategoryId")
-                        .IsRequired()
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("InspectionTrains");
                 });
@@ -465,25 +452,6 @@ namespace LaJuana.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("LaJuana.Domain.Document", b =>
-                {
-                    b.HasOne("LaJuana.Domain.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LaJuana.Domain.Category", "SubCategory")
-                        .WithMany()
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("SubCategory");
-                });
-
-            modelBuilder.Entity("LaJuana.Domain.InspectionTrain", b =>
                 {
                     b.HasOne("LaJuana.Domain.Category", "Category")
                         .WithMany()

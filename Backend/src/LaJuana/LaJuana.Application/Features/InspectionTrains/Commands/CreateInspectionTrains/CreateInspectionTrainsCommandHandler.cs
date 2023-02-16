@@ -1,13 +1,10 @@
-﻿using Aspose.Cells;
-using AutoMapper;
+﻿using AutoMapper;
 using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Application.Features.Documents.Commands.CreateFileDocuments;
-using LaJuana.Application.Models.ViewModels;
 using LaJuana.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace LaJuana.Application.Features.InspectionTrains.Commands.CreateInspectionTrains
 {
@@ -37,20 +34,23 @@ namespace LaJuana.Application.Features.InspectionTrains.Commands.CreateInspectio
             {
                 if (request.FileName == string.Empty) throw new Exception("File name se encuentra vacio");
 
-                var pathFile = await _documentService.SaveDocument(
-                                 request.SubCategoryId,
-                                 request.FileName,
-                                 request.File,
-                                 true,
-                                 true);
+                //var pathFile = await _documentService.SaveDocument(
+                //                 request.SubCategoryId.ToString(),
+                //                 request.FileName,
+                //                 request.File,
+                //                 true,
+                //                 true);
+
                 var inspectionTrain = new InspectionTrain(); 
 
-                inspectionTrain = await _aposeService.ReadDocInspectionIntegral(pathFile, inspectionTrain);
+                inspectionTrain = await _aposeService.ReadDocInspectionIntegral(request.FilePath, inspectionTrain);
 
-                inspectionTrain.Codigo = "Code";
+                inspectionTrain.Codigo = DateTime.Now.ToString("MM/dd/yyyy H:mm")+ "_" + request.Codigo;
                 inspectionTrain.FileName = request.FileName;
-                inspectionTrain.FilePath = pathFile;
-
+                inspectionTrain.FilePath = request.FilePath;
+                inspectionTrain.Status = (int)DocumentStatus.Habilitado;
+                inspectionTrain.CategoryId = request.CategoryId;
+                inspectionTrain.SubCategoryId = request.SubCategoryId;
                 _unitOfWork.Repository<InspectionTrain>().AddEntity(inspectionTrain);
                 await _unitOfWork.Complete();
                 return inspectionTrain.Id;

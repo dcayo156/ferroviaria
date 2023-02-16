@@ -4,6 +4,7 @@ using LaJuana.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaJuana.Infrastructure.Migrations
 {
     [DbContext(typeof(LaJuanaDbContext))]
-    partial class LaJuanaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230208053101_Update_Entity_InspeccionTren3")]
+    partial class Update_Entity_InspeccionTren3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

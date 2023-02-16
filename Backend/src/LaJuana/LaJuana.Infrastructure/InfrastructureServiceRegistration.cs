@@ -4,6 +4,7 @@ using LaJuana.Application.Models;
 using LaJuana.Infrastructure.Apose;
 using LaJuana.Infrastructure.Directories;
 using LaJuana.Infrastructure.Email;
+using LaJuana.Infrastructure.MineType;
 using LaJuana.Infrastructure.Persistence;
 using LaJuana.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,7 @@ namespace LaJuana.Infrastructure
             services.Configure<DirectoryIconSettings>(configuration.GetSection("DirectoryIconSettings"));
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IAposeService, AposeService>();
+            services.AddTransient<IMineTypeService, MineTypeService>();
             return services;
         }
 

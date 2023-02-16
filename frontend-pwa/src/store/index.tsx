@@ -6,6 +6,7 @@ import authReducer from './slices/Auth'
 import { accessProgramApi } from './services/AccessProgram'
 import { categoryApi } from './services/Category'
 import { documentApi } from './services/Document';
+import { inspectionTrainApi } from './services/InspectionTrain';
 
 export const createStore = (options?:ConfigureStoreOptions['preloadedState'] | undefined) => 
     configureStore({
@@ -15,6 +16,7 @@ export const createStore = (options?:ConfigureStoreOptions['preloadedState'] | u
             [accessProgramApi.reducerPath]: accessProgramApi.reducer,
             [categoryApi.reducerPath]: categoryApi.reducer,
             [documentApi.reducerPath]: documentApi.reducer,
+            [inspectionTrainApi.reducerPath]: inspectionTrainApi.reducer,
             auth: authReducer,
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
@@ -22,7 +24,8 @@ export const createStore = (options?:ConfigureStoreOptions['preloadedState'] | u
                                                 accessProgramApi.middleware,
                                                 categoryApi.middleware,
                                                 documentApi.middleware,
-                                                authApi.middleware
+                                                authApi.middleware,
+                                                inspectionTrainApi.middleware
                                                 ),
         ...options,
     })

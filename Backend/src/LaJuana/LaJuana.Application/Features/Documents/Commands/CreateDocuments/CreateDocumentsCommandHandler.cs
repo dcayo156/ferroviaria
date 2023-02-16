@@ -30,30 +30,6 @@ namespace LaJuana.Application.Features.Documents.Commands.CreateDocuments
             await Validation(request);
 
             var documentEntity = _mapper.Map<Document>(request);
-
-            //var path = Path.Combine(documentEntity.Category.Name, documentEntity.SubCategory.Name);
-
-            //var pathPhoto = string.Empty;
-            //var pathFile = string.Empty;
-
-            //if (request.PhotoName != string.Empty) 
-            //{
-            //    pathFile = await _documentService.SaveDocument(
-            //                path,
-            //                request.FileName,
-            //                request.File);
-            //}
-
-            //if (request.PhotoName != string.Empty)
-            //{
-            //    pathPhoto = await _documentService.SaveDocument(
-            //                path,
-            //                request.PhotoName,
-            //                request.Photo);
-            //}
-
-            //documentEntity.PhotoPath = pathPhoto;
-            //documentEntity.FilePath = pathFile;
             
             documentEntity.Status = (int)DocumentStatus.Habilitado;
 

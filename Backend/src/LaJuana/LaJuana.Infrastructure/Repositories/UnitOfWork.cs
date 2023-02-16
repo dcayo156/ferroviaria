@@ -18,6 +18,8 @@ namespace LaJuana.Infrastructure.Repositories
         private IDocumentsRepository _DocumentsRepository;
         public IDocumentsRepository DocumentRepository => _DocumentsRepository ??= new DocumentsRepository(_context);
 
+        private IInspectionTrainsRepository _InspectionTrainsRepository;
+        public IInspectionTrainsRepository InspectionTrainsRepository => _InspectionTrainsRepository ??= new InspectionTrainsRepository(_context);
         public UnitOfWork(LaJuanaDbContext context)
         {
             _context = context;
@@ -25,7 +27,7 @@ namespace LaJuana.Infrastructure.Repositories
 
         public LaJuanaDbContext LaJuanaDbContext => _context;
 
-        
+       
 
         public async Task<int> Complete()
         {

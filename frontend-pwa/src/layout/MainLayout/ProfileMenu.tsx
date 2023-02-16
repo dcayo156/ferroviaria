@@ -83,24 +83,24 @@ const ProfileMenu: React.FunctionComponent<ProfileMenuProps> = ({ anchorEl, setA
             {auth.user}
         </div>
         <Divider />
-        <MenuItem sx={{p:1}}>
+        {/* <MenuItem sx={{p:1}}>
             <ListItemIcon>
                 <MailIcon fontSize="small" />
             </ListItemIcon>
             Contacto
-        </MenuItem>
-        <MenuItem sx={{p:1}} onClick={()=>navigationTo("/auth/show/user-authenticated")}>
+        </MenuItem> */}
+        {/* <MenuItem sx={{p:1}} onClick={()=>navigationTo("/auth/show/user-authenticated")}>
             <ListItemIcon>
                 <DatosIcon fontSize="small" />
             </ListItemIcon>
             Mis Datos
-        </MenuItem>
-        <MenuItem sx={{p:1}} onClick={()=>navigationTo(`/auth/change-password/${id}`)}>
+        </MenuItem> */}
+        {/* <MenuItem sx={{p:1}} onClick={()=>navigationTo(`/auth/change-password/${id}`)}>
             <ListItemIcon>
                 <KeyIcon fontSize="small" />
             </ListItemIcon>
             Cambiar contraseña
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem sx={{p:1}} onClick={onLogout}>
             <ListItemIcon>
                 <Logout fontSize="small" />

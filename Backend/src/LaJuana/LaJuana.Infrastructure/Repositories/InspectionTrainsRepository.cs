@@ -1,4 +1,4 @@
-﻿using LaJuana.Application.Contracts.Infrastructure;
+﻿using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Domain;
 using LaJuana.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -13,14 +13,14 @@ namespace LaJuana.Infrastructure.Repositories
         }
         public async Task<IEnumerable<InspectionTrain>> GetListInspectionTrains()
         {
-            return await _context.InspectionTrains!
-                .OrderByDescending(p => p.Fecha)
+            return await _context.InspectionTrains!.Where(x => x.Status == (int)DocumentStatus.Habilitado)
+                .OrderByDescending(p => p.CreatedDate)
                 .ToListAsync();
 
         }
-        public async Task<InspectionTrain> FindByIdAsync(string Code)
+        public async Task<InspectionTrain> FindByIdAsync(Guid Id)
         {
-            var InspectionTrains = await _context.InspectionTrains!.Where(p => p.Codigo == Code)
+            var InspectionTrains = await _context.InspectionTrains!.Where(p => p.Id == Id && p.Status == (int)DocumentStatus.Habilitado)
                 .FirstOrDefaultAsync();
             return InspectionTrains;
         }

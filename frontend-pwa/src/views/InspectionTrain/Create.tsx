@@ -2,28 +2,27 @@ import * as React from "react";
 import { useState } from 'react';
 import Grid from "@mui/material/Grid";
 import { useNavigate} from 'react-router-dom'
-import { useCreateDocumentMutation } from '../../store/services/Document'
+import { useCreateInspectionTrainsMutation } from '../../store/services/InspectionTrain'
 import { toast } from 'react-toastify';
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import MainCard from '../../components/cards/MainCard';
 import CardButton from '../../components/cards/CardButton';
-import FormDocument from "./Forms/FormDocument";
+import FormInspectionTrain from "./Forms/FormDocument2";
 import SaveIcon from '@mui/icons-material/Save';
-import { IDocument } from '../../store/types/Document';
+import { IInspectionTrainCreate } from '../../store/types/InspectionTrain';
 import LoadingButton from "../../components/Buttons/LoadingButton";
 export default function Register() {
     const navigate =  useNavigate();
-    const [document, setDocument] = useState<IDocument>({
+    const [InspectionTrain, setInspectionTrain] = useState<IInspectionTrainCreate>({
         id:"",
+        codigo:"",
         fileName: "",
-        filePath: "",
-        photoName: "",
-        photoPath: "",
         categoryId: "",
-        subCategoryId: ""
+        subCategoryId: "",
+        filePath:""
     });
-    const [registerDocument] = useCreateDocumentMutation();
+    const [registerInspectionTrain] = useCreateInspectionTrainsMutation();
     const [isLoading,setIsLoading]=React.useState(false);
     const isURL=(str:string)=> {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -36,26 +35,25 @@ export default function Register() {
       }
     const saveChanges = () => { 
         setIsLoading(true)
-        //console.log(document)
-        const useToCreate: IDocument = {
+        //console.log(InspectionTrain)
+        const useToCreate: IInspectionTrainCreate = {
             id:"",
-            fileName: document.fileName,
-            filePath: document.filePath,
-            photoName: document.photoName,
-            photoPath: document.photoPath,
-            categoryId: document.categoryId,
-            subCategoryId: document.subCategoryId
+            codigo:InspectionTrain.codigo,
+            fileName: InspectionTrain.fileName,
+            categoryId: InspectionTrain.categoryId,
+            subCategoryId: InspectionTrain.subCategoryId,
+            filePath: InspectionTrain.filePath
           };
           if(useToCreate.categoryId=="" || useToCreate.subCategoryId==""){
             toast.warning("Ingrese todos los datos");
             setIsLoading(false)
             return
-          }
+          } 
             
-          registerDocument(useToCreate).then((response: { data: string } | { error: FetchBaseQueryError | SerializedError; })=>{
+          registerInspectionTrain(useToCreate).then((response: { data: string } | { error: FetchBaseQueryError | SerializedError; })=>{
             if("data" in response){
                 toast.success("Registro exitoso");
-                navigate("/document");
+                navigate("/InspectionTrain");
             }
             if("error" in response){
                 if("message" in response.error)
@@ -68,12 +66,12 @@ export default function Register() {
     }
     return (
     <MainCard 
-        title="Registrar Documentos" 
+        title="Registrar inspección" 
         secondary={
-            <CardButton type="back" title="Lista de  Documentos" link="/document" />}
+            <CardButton type="back" title="Lista de inspecciones integrales de trenes químicos" link="/InspectionTrain" />}
     >{
         <>
-        <FormDocument document={document} setDocument={setDocument} isCreate= {true}/>
+        <FormInspectionTrain inspectionTrain={InspectionTrain} setInspectionTrain={setInspectionTrain} isCreate= {true}/>
         <Grid item xs={12} md={12} display="flex" justifyContent="center">
             <LoadingButton
                 loading={isLoading}

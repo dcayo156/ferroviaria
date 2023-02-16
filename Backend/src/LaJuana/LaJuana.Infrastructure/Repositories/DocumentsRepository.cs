@@ -1,4 +1,4 @@
-﻿    using LaJuana.Application.Contracts.Persistence;
+﻿using LaJuana.Application.Contracts.Persistence;
 using LaJuana.Domain;
 using LaJuana.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ namespace LaJuana.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Document>> GetListDocuments()
         {
-            return await _context.Documents!.Where(x=> x.Status == (int)DocumentStatus.Habilitado)
+            return await _context.Documents!.Where(x => x.Status == (int)DocumentStatus.Habilitado)
                 .OrderBy(p => p.Category.Name)
                 .ToListAsync();
 

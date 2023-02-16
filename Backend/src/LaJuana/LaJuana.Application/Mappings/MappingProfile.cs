@@ -26,6 +26,8 @@ namespace LaJuana.Application.Mappings
             CreateMap<Document, DocumentsFullVm>();
             CreateMap<CreateDocumentsCommand, Document>();
             CreateMap<UpdateDocumentsCommand, Document>();
+
+            CreateMap<InspectionTrain, InspectionTrainsFullVm>();
         }
     }
 }

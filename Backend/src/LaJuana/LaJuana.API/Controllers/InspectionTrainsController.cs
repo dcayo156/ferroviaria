@@ -1,5 +1,10 @@
-﻿using LaJuana.Application.Features.InspectionTrains.Commands.CreateInspectionTrains;
+﻿using LaJuana.Application.Features.Documents.Queries.FindDocumentsFileById;
+using LaJuana.Application.Features.InspectionTrains.Commands.CreateInspectionTrains;
 using LaJuana.Application.Features.InspectionTrains.Commands.UpdateInspectionTrains;
+using LaJuana.Application.Features.InspectionTrains.Queries.FindInspectionTrainsFileById;
+using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTrainAll;
+using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTrains;
+using LaJuana.Application.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,11 +13,11 @@ namespace LaJuana.API.Controllers
 {
     [Route("v1/[controller]")]
     [ApiController]
-    public class InspectionsTrainController : Controller
+    public class InspectionTrainsController : Controller
     {
         private IMediator _mediator;
 
-        public InspectionsTrainController(IMediator mediator)
+        public InspectionTrainsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -56,15 +61,15 @@ namespace LaJuana.API.Controllers
 
         //    return NoContent();
         //}
-        //[HttpGet("GetInspectionTrains")]
-        ////[Authorize]
-        //[ProducesResponseType(typeof(IEnumerable<InspectionTrainsFullVm>), (int)HttpStatusCode.OK)]
-        //public async Task<ActionResult<IEnumerable<InspectionTrainsFullVm>>> GetInspectionTrainss()
-        //{
-        //    var query = new GetListInspectionTrainsQuery();
-        //    var InspectionTrainss = await _mediator.Send(query);
-        //    return Ok(InspectionTrainss);
-        //}
+        [HttpGet("GetInspectionTrains")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<InspectionTrainsFullVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<InspectionTrainsFullVm>>> GetInspectionTrainss()
+        {
+            var query = new GetListInspectionTrainsQuery();
+            var InspectionTrainss = await _mediator.Send(query);
+            return Ok(InspectionTrainss);
+        }
         //[HttpGet("FindInspectionTrainsById/{id}")]
         ////[Authorize]
         //[ProducesResponseType(typeof(InspectionTrainsFullVm), (int)HttpStatusCode.OK)]
@@ -75,12 +80,22 @@ namespace LaJuana.API.Controllers
         //    return Ok(InspectionTrains);
         //}
 
-        //[HttpGet("FindInspectionTrainsFileById/{id}")]
-        //public async Task<ActionResult<string>> FindInspectionTrainsFileById(string id, bool isFile)
-        //{
-        //    FindInspectionTrainsFileByIdQuery command = new FindInspectionTrainsFileByIdQuery(new Guid(id), isFile);
-        //    var InspectionTrainFileVm = await _mediator.Send(command);
-        //    return File(System.IO.File.OpenRead(InspectionTrainFileVm.FilePath), InspectionTrainFileVm.MimeType, InspectionTrainFileVm.FileName);
-        //}
+        [HttpGet("FindInspectionTrainsFileById/{id}")]
+        public async Task<ActionResult<string>> FindInspectionTrainsFileById(string id)
+        {
+            FindInspectionTrainsFileByIdQuery command = new FindInspectionTrainsFileByIdQuery(new Guid(id));
+            var InspectionTrainFileVm = await _mediator.Send(command);
+            return File(System.IO.File.OpenRead(InspectionTrainFileVm.FilePath), InspectionTrainFileVm.MimeType, InspectionTrainFileVm.FileName);
+        }
+
+        [HttpGet("GetInspectionTrainsAll")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<InspectionTrainsFullVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<InspectionTrainsFullVm>>> GetInspectionTrainsAll()
+        {
+            GetListInspectionTrainAllQuery command = new GetListInspectionTrainAllQuery();
+            var InspectionTrainss = await _mediator.Send(command);
+            return File(System.IO.File.OpenRead(InspectionTrainss.FilePath), InspectionTrainss.MimeType, InspectionTrainss.FileName);
+        }
     }
 }

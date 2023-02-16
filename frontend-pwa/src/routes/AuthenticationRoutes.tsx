@@ -5,13 +5,14 @@ import MinimalLayout from '../layout/MinimalLayout';
 const Login = Loadable(lazy(() => import('../components/Security/Login')));
 const Register = Loadable(lazy(() => import('../components/Security/Register')));
 
-
+const rutaServidor = "";//PRUBEA
+//const rutaServidor = "/FO"; //Produccion
 const AuthenticationRoutes = {
     path: '/authentication',
     element: <MinimalLayout />,
     children: [
         {
-            path: '/authentication',
+            path:  '/authentication',
             element: <Login />
         },
         {
@@ -19,7 +20,7 @@ const AuthenticationRoutes = {
             element: <Login />
         },
         {
-            path: '/authentication/register',
+            path:  '/authentication/register',
             element: <Register />
         }
     ]

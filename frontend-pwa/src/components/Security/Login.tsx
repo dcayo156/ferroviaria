@@ -147,7 +147,7 @@ export default function Login() {
                             ''
                     }
                     <SubmitLoadingButton loading={isLoading} text="Ingresar" fullWidth={true} />
-                    <Grid container>
+                    {/* <Grid container>
                         <Grid item xs>
                             <NavLink to="/authentication/register" className="NavLink-react-router">
                                 ¿No tienes cuenta? Registrate
@@ -158,7 +158,7 @@ export default function Login() {
                                 ¿Has olvidado tu contraseña?
                             </NavLink>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </Box>
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />
