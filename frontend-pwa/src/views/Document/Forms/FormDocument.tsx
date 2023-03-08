@@ -83,7 +83,7 @@ const FormDocument: React.FunctionComponent<FormDocumentProps> = ({ document, se
             var reader = new FileReader();
             reader.onload = (e) => {
                 setLoadFile(true);
-                setFileSave({ ...fileSave, fileName: file.name,file:(reader.result?reader.result as string:"") });
+                setFileSave({ ...fileSave,filePath:document.subCategoryId, fileName: file.name,file:(reader.result?reader.result as string:"") });
             }
             reader.readAsDataURL(file)
         }

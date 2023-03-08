@@ -97,6 +97,9 @@ const MainDrawer: React.FunctionComponent<MainDrawerProps> = ({open,drawerwidth,
         <LinkTo to="/InspectionTrain" text="Trenes Químicos" open={open} active={uri.includes("/InspectionTrain")} switchOpen={switchOpen}>
             <UserIcon />
         </LinkTo>
+        <LinkTo to="/Report" text="Reporte" open={open} active={uri.includes("/Report")} switchOpen={switchOpen}>
+            <UserIcon />
+        </LinkTo>
     </List>
 </Drawer> );
 }

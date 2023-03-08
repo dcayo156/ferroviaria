@@ -18,6 +18,13 @@ namespace LaJuana.Infrastructure.Repositories
                 .ToListAsync();
 
         }
+        public async Task<IEnumerable<InspectionTrain>> FindByDateAsync(DateTime date)
+        {
+            return await _context.InspectionTrains!.Where(x => x.Status == (int)DocumentStatus.Habilitado && x.CreatedDate >= date)
+                .OrderByDescending(p => p.CreatedDate)
+                .ToListAsync();
+
+        }
         public async Task<InspectionTrain> FindByIdAsync(Guid Id)
         {
             var InspectionTrains = await _context.InspectionTrains!.Where(p => p.Id == Id && p.Status == (int)DocumentStatus.Habilitado)

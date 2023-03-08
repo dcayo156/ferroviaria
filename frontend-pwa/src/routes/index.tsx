@@ -10,7 +10,7 @@ import AccessProgramRoute from './AccessProgram';
 import CategoryRoute from './Category';
 import DocumentRoute from './Document';
 import InspectionTrainRoute from './InspectionTrain';
-
+import InspectionTrainReportRoute from './InspectionTrainReport'
 const Login = Loadable(lazy(() => import('../components/Security/Login')));
 
 const rutaServidor = "";//PRUBEA
@@ -33,5 +33,6 @@ export default function ThemeRoutes() {
     AuthenticationRoutes,
     AuthRoutes,
     UserRoutes,
-    InspectionTrainRoute]);
+    InspectionTrainRoute,
+    InspectionTrainReportRoute]);
 }

@@ -19,6 +19,7 @@ namespace LaJuana.Identity.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly JwtSettings _jwtSettings;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IAuthWindowsServerService _authWindowsServerService; 
         private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
@@ -52,12 +53,13 @@ namespace LaJuana.Identity.Services
             return jwtSecurityToken;
         }
 
-        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<JwtSettings> jwtSettings, RoleManager<IdentityRole> roleManager)
+        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<JwtSettings> jwtSettings, RoleManager<IdentityRole> roleManager, IAuthWindowsServerService authWindowsServerService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _jwtSettings = jwtSettings.Value;
+            _authWindowsServerService= authWindowsServerService;
         }
 
         private string GenerateRefreshToken()
@@ -90,20 +92,37 @@ namespace LaJuana.Identity.Services
 
         public async Task<AuthResponse> Login(AuthRequest request)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
+            //var existUser = _authWindowsServerService.IsAuthenticated(_jwtSettings.DomainName, request.Email, request.Password);
+            //if (!existUser)
+            //    throw new Exception($"El usuario con email {request.Email} no existe");
+
+            ApplicationUser? user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
-                throw new Exception($"El usuario con email {request.Email} no existe");
+            {
+                var registrationRequest = new RegistrationRequest()
+                {
+                    Email = request.Email,
+                    Username = request.Email,
+                    Nombre = request.Email,
+                    Apellidos = "",
+                    Password = request.Password
+                };
+                var userNew = await Register(registrationRequest);
+               
+                user = await _userManager.FindByEmailAsync(request.Email);
 
-            var resultado = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+                if (user == null)
+                    throw new Exception($"El usuario con email {request.Email} no existe");
+            }            
 
-            if (!resultado.Succeeded)
-                throw new Exception($"Las credenciales son incorrectas");
+            //var resultado = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
+
+            //if (!resultado.Succeeded)
+            //    throw new Exception($"Las credenciales son incorrectas");
 
             var token = await GenerateToken(user);
-            var refreshToken = GenerateRefreshToken();
-
-            
+            var refreshToken = GenerateRefreshToken();            
             
             var authResponse = new AuthResponse
             {

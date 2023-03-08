@@ -1,5 +1,5 @@
-import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
-import { IInspectionTrain,IInspectionTrainCreate,IInspectionTrainImage,IInspectionTrainImageResponse } from '../../types/InspectionTrain';
+import { createApi} from '@reduxjs/toolkit/query/react'
+import { IInspectionTrain,IInspectionTrainCreate} from '../../types/InspectionTrain';
 import { baseQueryWithReauth } from '../FetchBaseQuery';
 
 
@@ -58,7 +58,11 @@ export const inspectionTrainApi = createApi({
                 body: {id:id}
             }),
             invalidatesTags:  [{ type: 'InspectionTrain', id:"List" }],
-        })
+        }),
+        getInspectionTrainsForYear: builder.query<any, void >({
+            query: () => `InspectionTrains/GetInspectionTrainsForYear`,
+            providesTags:[{type:"InspectionTrain", id:"List"}],            
+        }),
     })
 });
 export const { 
@@ -69,5 +73,6 @@ export const {
     // useCreateFileInspectionTrainsMutation,
     // useUpdateInspectionTrainsMutation,
     useGetFileDocAllInspectionTrainsQuery,
-    useDeleteInspectionTrainsMutation
+    useDeleteInspectionTrainsMutation,
+    useGetInspectionTrainsForYearQuery
 } = inspectionTrainApi;

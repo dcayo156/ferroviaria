@@ -6,5 +6,6 @@ namespace LaJuana.Application.Contracts.Persistence
     {
         Task<IEnumerable<InspectionTrain>> GetListInspectionTrains();
         Task<InspectionTrain> FindByIdAsync(Guid Id);
+        Task<IEnumerable<InspectionTrain>> FindByDateAsync(DateTime date);
     }
 }

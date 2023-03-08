@@ -1,6 +1,7 @@
 ﻿using LaJuana.Application.Features.Documents.Queries.FindDocumentsFileById;
 using LaJuana.Application.Features.InspectionTrains.Commands.CreateInspectionTrains;
 using LaJuana.Application.Features.InspectionTrains.Commands.UpdateInspectionTrains;
+using LaJuana.Application.Features.InspectionTrains.Queries.FindInspeccitionTrainByDate;
 using LaJuana.Application.Features.InspectionTrains.Queries.FindInspectionTrainsFileById;
 using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTrainAll;
 using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTrains;
@@ -96,6 +97,16 @@ namespace LaJuana.API.Controllers
             GetListInspectionTrainAllQuery command = new GetListInspectionTrainAllQuery();
             var InspectionTrainss = await _mediator.Send(command);
             return File(System.IO.File.OpenRead(InspectionTrainss.FilePath), InspectionTrainss.MimeType, InspectionTrainss.FileName);
+        }
+
+        [HttpGet("GetInspectionTrainsForYear")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<InspectionTrainPieChartFullVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<InspectionTrainPieChartFullVm>>> GetInspectionTrainsForYear()
+        {
+            FindInspeccitionTrainByDateQuery command = new FindInspeccitionTrainByDateQuery();
+            var InspectionTrainss = await _mediator.Send(command);
+            return Ok(InspectionTrainss);
         }
     }
 }

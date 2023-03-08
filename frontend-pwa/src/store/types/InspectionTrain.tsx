@@ -35,3 +35,14 @@ export interface IInspectionTrainOptions  {
     categoryId: string,
     subCategoryId: string
 }
+export interface IInspectionTrainPieChartFullVm  {
+    labels: string[],
+    datasets: Datasets
+}
+export interface Datasets  {
+    label: string,
+    data:number[],
+    backgroundColor: string[],
+    borderColor: string[],
+    borderWidth: number
+}

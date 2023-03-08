@@ -18,6 +18,8 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { hasError } from "../../components/Security/ErrorManager";
 import FormSelectOption from './Forms/FormSelectOption2';
+import PieChart from './Forms/PieChart';
+import BarChart from "./Forms/BarChart";
 interface ListInspectionTrainsProps {}
 const ListInspectionTrains: React.FunctionComponent<ListInspectionTrainsProps> = () => {
   const { data: InspectionTrainsData, error, isLoading } = useGetListInspectionTrainsQuery();
@@ -123,7 +125,7 @@ const ListInspectionTrains: React.FunctionComponent<ListInspectionTrainsProps> =
       title= "Inspección integral de trenes"
       secondary={
         <CardButton type="plus" title="Crear Inspeccion de Tren" link="/InspectionTrain/create" />
-      }
+      }      
     >
       {isLoading ? (
         <LinearProgress color="secondary" />
@@ -141,10 +143,15 @@ const ListInspectionTrains: React.FunctionComponent<ListInspectionTrainsProps> =
               disableSelectionOnClick
             />
           </Box>
+          {/* <Box>
+            <BarChart/>
+          </Box> */}
         </>
 
       )}
+      
     </MainCard>
+    
   );
 };
 

@@ -28,6 +28,11 @@ namespace LaJuana.Application.Mappings
             CreateMap<UpdateDocumentsCommand, Document>();
 
             CreateMap<InspectionTrain, InspectionTrainsFullVm>();
+
+            CreateMap<InspectionTrain, InspectionTrainBasicAspects>();
+            CreateMap<InspectionTrain, InspectionTrainTechnicalAspects>();
+            CreateMap<InspectionTrain, InspectionTrainProperHandling>();
+
         }
     }
 }

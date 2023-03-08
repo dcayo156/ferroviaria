@@ -1,4 +1,5 @@
 ﻿using LaJuana.Application.Contracts.Identity;
+using LaJuana.Application.Contracts.Infrastructure;
 using LaJuana.Application.Models.Identity;
 using LaJuana.Identity.Models;
 using LaJuana.Identity.Services;
@@ -30,6 +31,7 @@ namespace LaJuana.Identity
 
             services.AddTransient<IAuthService, AuthService>();
 
+            services.AddTransient<IAuthWindowsServerService, AuthWindowsServerService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
