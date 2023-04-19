@@ -8,5 +8,6 @@
         public double DurationInMinutes { get; set; }
         public double RefreshTokenDurationDays { get; set; }
         public string DomainName { get; set; } = string.Empty;
+        public string ServerName { get; set; } = string.Empty;
     }
 }

@@ -7,6 +7,7 @@ using LaJuana.Application.Features.Documents.Queries.FindDocumentsFileById;
 using LaJuana.Application.Features.Documents.Queries.GetListDocuments;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Net;
@@ -25,19 +26,20 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpPost("CreateDocuments")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<Guid>> CreateDocuments([FromBody] CreateDocumentsCommand command)
         {
             return await _mediator.Send(command);
         }
         [HttpPost("CreateDocumentsFile")]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<FileDirectoryResponseVm>> CreateDocumentsFile([FromBody] CreateDocumentsFileCommand command)
         {
             return await _mediator.Send(command);
         }
         [HttpPut("UpdateDocuments")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -49,6 +51,7 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpDelete("DeleteDocuments/{id}", Name = "DeleteDocuments")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -64,7 +67,7 @@ namespace LaJuana.API.Controllers
             return NoContent();
         }
         [HttpGet("GetDocuments")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<DocumentsFullVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<DocumentsFullVm>>> GetDocumentss()
         {
@@ -73,7 +76,7 @@ namespace LaJuana.API.Controllers
             return Ok(Documentss);
         }
         [HttpGet("FindDocumentsById/{id}")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(DocumentsFullVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<DocumentsFullVm>>> FindDocumentsById(Guid id)
         {
@@ -83,6 +86,7 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpGet("FindDocumentsFileById/{id}")]
+        //[Authorize]
         public async Task<ActionResult<string>> FindDocumentsFileById(string id, bool isFile)
         {
             FindDocumentsFileByIdQuery command = new FindDocumentsFileByIdQuery(new Guid(id), isFile);

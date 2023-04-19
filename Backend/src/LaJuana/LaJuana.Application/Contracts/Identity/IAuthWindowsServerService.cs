@@ -2,6 +2,6 @@
 {
     public interface IAuthWindowsServerService
     {
-        bool IsAuthenticated(string domain, string username, string pwd);
+        bool IsAuthenticated(string domain, string username, string pwd);       
     }
 }

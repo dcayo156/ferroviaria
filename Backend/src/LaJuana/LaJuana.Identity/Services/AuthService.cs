@@ -89,12 +89,11 @@ namespace LaJuana.Identity.Services
                 throw new SecurityTokenException("Invalid token");
             return principal;
         }
-
         public async Task<AuthResponse> Login(AuthRequest request)
         {
-            //var existUser = _authWindowsServerService.IsAuthenticated(_jwtSettings.DomainName, request.Email, request.Password);
-            //if (!existUser)
-            //    throw new Exception($"El usuario con email {request.Email} no existe");
+            var existUser = _authWindowsServerService.IsAuthenticated(_jwtSettings.DomainName, request.Email, request.Password);
+            if (!existUser)
+                throw new Exception($"El usuario con email {request.Email} no existe");
 
             ApplicationUser? user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -142,7 +141,7 @@ namespace LaJuana.Identity.Services
             authResponse.Role = role;
             await _userManager.UpdateAsync(user);
             return authResponse;
-        }
+        }   
         public async Task<RegistrationResponse> Register(RegistrationRequest request)
         {
             var existingUser = await _userManager.FindByNameAsync(request.Username);

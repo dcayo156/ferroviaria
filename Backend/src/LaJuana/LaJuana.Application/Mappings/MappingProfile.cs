@@ -32,7 +32,7 @@ namespace LaJuana.Application.Mappings
             CreateMap<InspectionTrain, InspectionTrainBasicAspects>();
             CreateMap<InspectionTrain, InspectionTrainTechnicalAspects>();
             CreateMap<InspectionTrain, InspectionTrainProperHandling>();
-
+            CreateMap<InspectionTrain, InspectionTrainPassing>();
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LaJuana.Application.Models.ViewModels
+﻿namespace LaJuana.Application.Models.ViewModels
 {
     public class InspectionTrainBasicAspects
     {
@@ -29,6 +23,20 @@ namespace LaJuana.Application.Models.ViewModels
         public string? MenejoAdecuadoOnceSi { get; set; }
         public string? MenejoAdecuadoDoceSi { get; set; }
         public string? MenejoAdecuadoTreceSi { get; set; }
+        public DateTime? CreatedDate { get; set; }
+    }
+    public class InspectionTrainPassing
+    {
+        public string? InspeccionTrenCatorceItem { get; set; }
+        public string? InspeccionTrenQuinceItem { get; set; }
+        public string? InspeccionTrenDieciSeisItem { get; set; }
+        public string? InspeccionTrenDieciSieteItem { get; set; }
+        public string? InspeccionTrenDieciOchoItem { get; set; }
+        public string? InspeccionTrenDieciNueveItem { get; set; }
+        public string? InspeccionTrenVeinteItem { get; set; }
+        public string? InspeccionTrenVeintiUnoItem { get; set; }
+        public string? InspeccionTrenVeintiDosItem { get; set; }
+        public string? InspeccionTrenVeintiTresItem { get; set; }
         public DateTime? CreatedDate { get; set; }
     }
 }

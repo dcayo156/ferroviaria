@@ -20,13 +20,12 @@ namespace LaJuana.API.Controllers
             _authService = authService;
             _roleManager = roleManager;
         }
-
+       
         [HttpPost("Login")]
         public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
         {
             return Ok(await _authService.Login(request));
-        }
-
+        }       
         [HttpPost("Register")]
         public async Task<ActionResult<RegistrationResponse>> Register([FromBody] RegistrationRequest request)
         {

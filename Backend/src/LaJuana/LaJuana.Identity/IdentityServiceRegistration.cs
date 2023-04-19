@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -28,7 +29,20 @@ namespace LaJuana.Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<LaJuanaIdentityDbContext>().AddDefaultTokenProviders();
 
+            var identityOptions = services.BuildServiceProvider()
+                             .GetService<IOptions<IdentityOptions>>().Value;
 
+            identityOptions.Password.RequireUppercase = false;
+            identityOptions.Password.RequireNonAlphanumeric = false;
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = identityOptions.Password.RequireUppercase;
+                options.Password.RequireNonAlphanumeric = identityOptions.Password.RequireNonAlphanumeric;
+                options.Password.RequiredLength = 6;
+            });
             services.AddTransient<IAuthService, AuthService>();
 
             services.AddTransient<IAuthWindowsServerService, AuthWindowsServerService>();

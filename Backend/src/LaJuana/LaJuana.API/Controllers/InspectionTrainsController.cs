@@ -7,6 +7,7 @@ using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTra
 using LaJuana.Application.Features.InspectionTrains.Queries.GetListInspectionTrains;
 using LaJuana.Application.Models.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -24,7 +25,7 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpPost("CreateInspectionTrains")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<Guid>> CreateInspectionTrains([FromBody] CreateInspectionTrainsCommand command)
         {
@@ -37,6 +38,7 @@ namespace LaJuana.API.Controllers
         //    return await _mediator.Send(command);
         //}
         [HttpPut("UpdateInspectionTrains")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -63,7 +65,7 @@ namespace LaJuana.API.Controllers
         //    return NoContent();
         //}
         [HttpGet("GetInspectionTrains")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<InspectionTrainsFullVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<InspectionTrainsFullVm>>> GetInspectionTrainss()
         {
@@ -90,7 +92,6 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpGet("GetInspectionTrainsAll")]
-        //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<InspectionTrainsFullVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<InspectionTrainsFullVm>>> GetInspectionTrainsAll()
         {
@@ -100,7 +101,7 @@ namespace LaJuana.API.Controllers
         }
 
         [HttpGet("GetInspectionTrainsForYear")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<InspectionTrainPieChartFullVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<InspectionTrainPieChartFullVm>>> GetInspectionTrainsForYear()
         {

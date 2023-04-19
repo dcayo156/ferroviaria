@@ -40,10 +40,12 @@ namespace LaJuana.Application.Features.InspectionTrains.Queries.FindInspeccition
                 var inspectionTrainBasicAspects = _mapper.Map<List<InspectionTrainBasicAspects>>(listInspeccionTren);
                 var inspectionTrainTechnicalAspects = _mapper.Map<List<InspectionTrainTechnicalAspects>>(listInspeccionTren);
                 var inspectionTrainProperHandling = _mapper.Map<List<InspectionTrainProperHandling>>(listInspeccionTren);
-    
+                var inspectionTrainPassing = _mapper.Map<List<InspectionTrainPassing>>(listInspeccionTren);
+
                 var countBasicAspects = new List<int>();
                 var countTechnicalAspects = new List<int>();
-                var countProperHandling = new List<int>(); 
+                var countProperHandling = new List<int>();
+                var countPassing = new List<int>();
 
                 foreach (var year in yearsList)
                 {
@@ -74,9 +76,26 @@ namespace LaJuana.Application.Features.InspectionTrains.Queries.FindInspeccition
                         listaProperHandling.Add(item?.MenejoAdecuadoDoceSi);
                         listaProperHandling.Add(item?.MenejoAdecuadoTreceSi);
                     }
+
+                    List<string> listaPassing = new List<string>();
+                    foreach (var item in inspectionTrainPassing.Where(x => Convert.ToDateTime(x.CreatedDate).Year == year.Year))
+                    {
+                        listaPassing.Add(item?.InspeccionTrenCatorceItem);
+                        listaPassing.Add(item?.InspeccionTrenQuinceItem);
+                        listaPassing.Add(item?.InspeccionTrenDieciSeisItem);
+                        listaPassing.Add(item?.InspeccionTrenDieciSieteItem);
+                        listaPassing.Add(item?.InspeccionTrenDieciOchoItem);
+                        listaPassing.Add(item?.InspeccionTrenDieciNueveItem);
+                        listaPassing.Add(item?.InspeccionTrenVeinteItem);
+                        listaPassing.Add(item?.InspeccionTrenVeintiUnoItem);
+                        listaPassing.Add(item?.InspeccionTrenVeintiDosItem);
+                        listaPassing.Add(item?.InspeccionTrenVeintiTresItem);
+                    }
+
                     countBasicAspects.Add(listaBasicAspects.Count(x => x != null && x != string.Empty));
                     countTechnicalAspects.Add(listaTechnicalAspects.Count(x => x != null && x != string.Empty));
                     countProperHandling.Add(listaProperHandling.Count(x => x != null && x != string.Empty));
+                    countPassing.Add(listaPassing.Count(x => x != null && x != string.Empty));
                 }
                 var listDataSets = new List<Datasets>();
 
@@ -103,9 +122,19 @@ namespace LaJuana.Application.Features.InspectionTrains.Queries.FindInspeccition
                     data = countProperHandling.ToArray(),
                     BackgroundColor = "rgba(255, 159, 64, 1)"
                 };
+
+                //Manejo adecuado de trenes
+                var dataPassing = new Datasets()
+                {
+                    Label = "Inspección de tren al Paso",
+                    data = countPassing.ToArray(),
+                    BackgroundColor = "rgba(75, 192, 192, 0.2)"
+                };
+
                 listDataSets.Add(dataBasicAspect);
                 listDataSets.Add(dataTechnicalAspects);
                 listDataSets.Add(dataProperHandling);
+                listDataSets.Add(dataPassing);
 
                 var inspectionTrainPieChartFullVm = new InspectionTrainPieChartFullVm();
                 inspectionTrainPieChartFullVm.Labels = yearsList.Select(x=> x.Year.ToString()).ToArray();
